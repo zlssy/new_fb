@@ -1,6 +1,7 @@
 ﻿Formbuilder.registerField 'dropdown',
 
-  order: 24
+  order: 20
+  name: '选择题'
 
   view: """
     <select>
@@ -21,7 +22,7 @@
   """
 
   addButton: """
-    <span class="symbol"><span class="fa fa-caret-down"></span></span> 下拉选项
+    <span class="symbol"><span class="fa fa-caret-down"></span></span> 选择题
   """
 
   defaultAttributes: (attrs) ->

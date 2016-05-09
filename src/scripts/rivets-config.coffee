@@ -7,7 +7,7 @@
     $(el).unbind('input.rivets')
 
 rivets.configure
-  prefix: "rv"
+  prefix: "rv"  
   adapter:
     subscribe: (obj, keypath, callback) ->
       callback.wrapped = (m, v) -> callback(v)
@@ -25,3 +25,6 @@ rivets.configure
         obj.set(keypath, value);
       else
         obj[keypath] = value
+
+rivets.formatters.getname = (v) ->
+    Formbuilder.fields[v].name

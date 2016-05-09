@@ -1,6 +1,7 @@
 ﻿Formbuilder.registerField 'radio',
 
-  order: 15
+  order: 0
+  name: '单选题'
 
   view: """
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
@@ -16,7 +17,7 @@
       <div class='other-option'>
         <label class='fb-option'>
           <input type='radio' />
-          Other
+          其他
         </label>
 
         <input type='text' />

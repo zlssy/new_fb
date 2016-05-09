@@ -64,7 +64,7 @@ class ViewFieldView extends Backbone.View
   duplicate: ->
     attrs = _.clone(@model.attributes)
     delete attrs['id']
-    attrs['label'] += ' Copy'
+    attrs['label'] += ' 复制项'
     @parentView.createField attrs, { position: @model.indexInDOM() + 1 }
 
 
@@ -73,6 +73,9 @@ class EditFieldView extends Backbone.View
 
   events:
     'click .js-add-option': 'addOption'
+    'keypress .option-label-input:last': (e) ->
+      key = e.keyCode or e.which
+      @addOption e if key == 13
     'click .js-remove-option': 'removeOption'
     'click .js-default-updated': 'defaultUpdated'
     'input .option-label-input': 'forceRender'
@@ -190,8 +193,8 @@ class BuilderView extends Backbone.View
     return @
 
   bindWindowScrollEvent: ->
-    $(window).on 'scroll', =>
-      return if @$fbLeft.data('locked') == true
+    $(window).on 'scroll , resize', =>
+      # return if @$fbLeft.data('locked') == true
       newMargin = Math.max(0, $(window).scrollTop() - @$el.offset().top)
       maxMargin = @$responseFields.height()
 
@@ -358,7 +361,7 @@ class Formbuilder
   @helpers:
     defaultFieldAttrs: (field_type) ->
       attrs = {}
-      attrs[Formbuilder.options.mappings.LABEL] = 'Untitled'
+      attrs[Formbuilder.options.mappings.LABEL] = ''
       attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type
       attrs[Formbuilder.options.mappings.REQUIRED] = true
       attrs['field_options'] = {}
@@ -369,6 +372,7 @@ class Formbuilder
 
   @options:
     BUTTON_CLASS: 'fb-button'
+    CHOICE_BUTTON: 'choice'
     HTTP_ENDPOINT: ''
     HTTP_METHOD: 'POST'
     AUTOSAVE: true
@@ -393,9 +397,9 @@ class Formbuilder
       LENGTH_UNITS: 'field_options.min_max_length_units'
 
     dict:
-      ALL_CHANGES_SAVED: 'All changes saved'
+      ALL_CHANGES_SAVED: '问卷已保存'
       SAVE_FORM: 'Save form'
-      UNSAVED_CHANGES: 'You have unsaved changes. If you leave this page, you will lose those changes!'
+      UNSAVED_CHANGES: '你还没有保存你的问卷，确定要离开？离开问卷数据将丢失。'
 
   @fields: {}
   @inputFields: {}
