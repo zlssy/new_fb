@@ -1,0 +1,664 @@
+
+.questionnaire .pagenav {
+    text-align: right
+}
+
+.questionnaire .btn-add {
+    background: #2ead40;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.questionnaire .btn-add:hover {
+    background: #34c449
+}
+
+.questionnaire .questionnaire-query {
+    height: 40px;
+    padding-top: 10px;
+}
+
+.questionnaire .questionnaire-query span {
+    vertical-align: middle
+}
+
+.questionnaire .questionnaire-query .key {
+    height: 27px
+}
+
+.questionnaire .questionnaire-query .date input {
+    width: 120px;
+    margin-right: 5px
+}
+
+.questionnaire .questionnaire-query .date img {
+    vertical-align: middle
+}
+
+.questionnaire .questionnaire-query a {
+    vertical-align: middle
+}
+
+.questionnaire .table {
+    border: 1px solid #ddd;
+}
+
+.questionnaire .table thead.td {
+    background: #f6f6f6;
+    border-bottom: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.questionnaire .table .td {
+    padding: 10px 5px;
+    text-align: center;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap
+}
+
+.questionnaire .table .btn-ico {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px
+}
+
+.questionnaireReport {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.questionnaireReport .title {
+    padding: 10px 20px;
+    position: relative;
+}
+
+.questionnaireReport .title h2 {
+    margin: 0;
+    padding: 0;
+    color: #444;
+    font-size: 18px;
+    font-weight: normal;
+    text-indent: 22px;
+    background: url("../images/ico_flag.png") no-repeat left center
+}
+
+.questionnaireReport .title a {
+    position: absolute;
+    right: 10px;
+    top: 15px
+}
+
+.questionnaireReport .total {
+    background: #f4fcff;
+    height: 90px;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+}
+
+.questionnaireReport .total >div {
+    width: 33.3333%;
+    float: left;
+    text-align: center;
+}
+
+.questionnaireReport .total >div span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    vertical-align: middle
+}
+
+.questionnaireReport .total >div label {
+    display: inline-block;
+    width: 90px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.questionnaireReport .total >div label i {
+    display: block;
+    color: #fa6215;
+    font-size: 26px
+}
+
+.questionnaireReport .report {
+    padding: 0 20px 50px 20px;
+}
+
+.questionnaireReport .report .cat a {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #33bfe7;
+    color: #fff;
+}
+
+.questionnaireReport .report .cat a.current,.questionnaireReport .report .cat a:hover {
+    background: #1f89ce
+}
+
+.questionnaireReport .report .cat .btn-export {
+    width: 60px;
+    border-radius: 3px;
+    vertical-align: top;
+    float: right
+}
+
+.questionnaireReport .report .cat-containers {
+    padding: 10px 0
+}
+
+.questionnaireReport .report .table {
+    border: 1px solid #ddd;
+    line-height: 30px;
+}
+
+.questionnaireReport .report .table thead {
+    padding: 2px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #ddd;
+}
+
+.questionnaireReport .report .table thead td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.questionnaireReport .report .table tfoot {
+    padding: 2px;
+    background: #f6f6f6;
+    border-top: 1px solid #ddd
+}
+
+.questionnaireReport .report h4 {
+    font-size: 14px
+}
+
+.questionnaireReport .report h5 {
+    font-size: 13px;
+    font-weight: normal
+}
+
+.questionnaireReport .report table thead {
+    font-weight: bold
+}
+
+.questionnaireReport .report table td.first {
+    padding-left: 10px
+}
+
+.questionnaireReport .report table td.td-count {
+    width: 50px
+}
+
+.questionnaireReport .report table td.td-visitor {
+    width: 80px
+}
+
+.questionnaireReport .report table td.rate {
+    width:25%;
+    color: #f33;
+    text-align: center;
+}
+
+.questionnaireReport .report table td.rate label {
+    display: inline-block;
+    background: #e9e9e9;
+    width: 90%;
+    height: 12px;
+    line-height: 12px;
+    text-indent: 0;
+    position: relative;
+    text-align: center;
+}
+
+.questionnaireReport .report table td.rate label span {
+    position:absolute;
+    left:0; top:0;
+    height: 100%;
+    line-height:0;
+    background: #4ac4cd
+}
+.questionnaireReport .report table td.rate label em {
+    position:relative;
+}
+.questionnaireReport .report .list {
+    clear: both;
+}
+
+.questionnaireReport .report .list tr {
+    border-bottom: 1px dashed #ddd
+}
+
+.questionnaireReport .report .list a {
+    float: right;
+    margin-bottom: 10px
+}
+
+.questionnaireReport .report .list .page-nav a {
+    float: none
+}
+
+.questionnaireReport .report .person-total td {
+    line-height: 30px
+}
+
+.mod-questionnaire .publish-success {
+    padding: 40px 180px;
+}
+
+.mod-questionnaire .publish-success h2 {
+    width: 250px;
+    margin: 0 auto 15px;
+    clear: both;
+    display: block;
+    line-height: 40px;
+    color: #666;
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.mod-questionnaire .publish-success h2.status-I {
+    background: url("../images/ico_success.png") no-repeat left center;
+    text-indent: 50px
+}
+
+.mod-questionnaire .publish-success h3 {
+    color: #666;
+    margin-bottom: 5px
+}
+
+.mod-questionnaire .publish-success .share-link > label {
+    font-size: 14px;
+    line-height: 30px
+}
+
+.mod-questionnaire .publish-success .share-link .text-box-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.mod-questionnaire .publish-success .share-link .text-box-wrap .text-box {
+    width: 99%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background: #f0f0f0
+}
+
+.mod-questionnaire .publish-success .share-link .text-box-wrap .btn-copy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    border-radius: 0 3px 3px 0;
+    box-sizing: border-box;
+    width: 85px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+}
+
+.mod-questionnaire .publish-success .share-link .text-box-wrap .btn-copy:hover {
+    background: #269ae1;
+    color: #fff
+}
+
+.mod-questionnaire .publish-success .qr-code {
+    padding: 20px 0;
+}
+
+.mod-questionnaire .publish-success .qr-code .qr-code-img {
+    width: 160px;
+    height: 160px;
+    float: left;
+    border: 1px solid #ddd;
+}
+
+.mod-questionnaire .publish-success .qr-code .qr-code-img img,.mod-questionnaire .publish-success .qr-code .qr-code-img table {
+    width: 140px;
+    height: 140px;
+    margin: 10px
+}
+
+.mod-questionnaire .publish-success .qr-code .desc {
+    float: left;
+    margin-left: 20px;
+}
+
+.mod-questionnaire .publish-success .qr-code .desc p {
+    line-height: 24px
+}
+
+.mod-questionnaire .publish-success .btn-wrap {
+    clear: both;
+    padding-top: 20px;
+}
+
+.mod-questionnaire .publish-success .btn-wrap p {
+    line-height: 30px;
+    font-size: 14px
+}
+
+.mod-questionnaire .publish-success .btn-wrap > div {
+    margin: 10px 0
+}
+
+.mod-questionnaire .publish-success .btn-wrap .btn-new,.mod-questionnaire .publish-success .btn-wrap .btn-manage {
+    display: inline-block;
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 10px;
+    padding: 0;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    background: #1f89ce;
+    color: #fff;
+}
+
+.mod-questionnaire .publish-success .btn-wrap .btn-new:hover,.mod-questionnaire .publish-success .btn-wrap .btn-manage:hover {
+    background: #2997df
+}
+
+.mod-questionnaire .publish-success .btn-wrap .btn-manage {
+    background: #dd8a36;
+}
+
+.mod-questionnaire .publish-success .btn-wrap .btn-manage:hover {
+    background: #e0964a
+}
+
+.mod-questionnaire .paper {
+    margin: 60px 0;
+}
+
+.mod-questionnaire .paper .share-wrap {
+    background: #f8f8f8;
+    padding: 20px 100px;
+    height: auto;
+    overflow: hidden;
+}
+
+.mod-questionnaire .paper .share-wrap .qr-code {
+    float: left;
+    background: #fff;
+}
+
+.mod-questionnaire .paper .share-wrap .qr-code .qr-code-img {
+    border: 1px solid #ddd;
+    padding: 5px
+}
+
+.mod-questionnaire .paper .share-wrap .share-link {
+    float: left;
+    margin-left: 30px;
+    width: 600px;
+}
+
+.mod-questionnaire .paper .share-wrap .share-link > label {
+    font-size: 14px;
+    line-height: 30px;
+    margin-left: 5px
+}
+
+.mod-questionnaire .paper .share-wrap .share-link .text-box-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.mod-questionnaire .paper .share-wrap .share-link .text-box-wrap .text-box {
+    width: 99%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background: #fff
+}
+
+.mod-questionnaire .paper .share-wrap .share-link .text-box-wrap .btn-copy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    border-radius: 0 3px 3px 0;
+    box-sizing: border-box;
+    width: 85px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background: #269ae1;
+    color: #fff;
+    font-size: 13px;
+}
+
+.mod-questionnaire .paper .share-wrap .share-link .text-box-wrap .btn-copy:hover {
+    background: #3ca4e4
+}
+
+.mod-questionnaire .paper .logo {
+    position: relative;
+    height: 100px;
+}
+
+.mod-questionnaire .paper .logo img {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    width: 120px;
+    height: 60px
+}
+
+.mod-questionnaire .paper .logo .btn-edit {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 80px;
+    display: block;
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: #999;
+    color: #fff;
+}
+
+.mod-questionnaire .paper .logo .btn-edit:hover {
+    background: #aaa
+}
+
+.mod-questionnaire .paper h2 {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #555;
+    line-height: 40px;
+    margin: 0
+}
+
+.mod-questionnaire .paper .hd {
+    margin: 0 80px;
+    padding: 10px 100px
+}
+
+.mod-questionnaire .paper .base-info {
+    text-align: left;
+    padding: 10px 0;
+}
+
+.mod-questionnaire .paper .base-info label {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    line-height: 20px;
+    vertical-align: bottom;
+}
+
+.mod-questionnaire .paper .base-info label i {
+    color: #f33;
+    font-style: normal
+}
+
+.mod-questionnaire .paper .base-info .text-box {
+    margin: 2px 0;
+    border-width: 0 0 1px 0;
+    border-color: #666
+}
+
+.mod-questionnaire .paper .base-info .q-err {
+    border-color: #f33
+}
+
+.mod-questionnaire .paper .text-box:focus,.mod-questionnaire .paper .text-area:focus {
+    background: #fff
+}
+
+.mod-questionnaire .paper .question-list {
+    margin: 0 80px
+}
+
+.mod-questionnaire .paper .question-item {
+    border-top: 1px dashed #ddd;
+    padding: 30px 100px;
+    line-height: 30px;
+}
+
+.mod-questionnaire .paper .question-item h3 {
+    display: inline-block;
+    margin: 0;
+    padding: 10px 0;
+    color: #555;
+    font-weight: bold
+}
+
+.mod-questionnaire .paper .question-item > span {
+    color: #999
+}
+
+.mod-questionnaire .paper .question-item .answer-list {
+    clear: both;
+}
+
+.mod-questionnaire .paper .question-item .answer-list li > span {
+    display: inline-block
+}
+
+.mod-questionnaire .paper .question-item ul {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.mod-questionnaire .paper .question-item .other-answer-input {
+    border: 0;
+    border-bottom: 1px solid #666;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: bottom;
+    text-indent: 0
+}
+
+.mod-questionnaire .paper .question-item .answer {
+    display: inline-block;
+    padding-right: 20px;
+    width: 520px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.mod-questionnaire .paper .question-item .answer:hover {
+    color: #00a0e8
+}
+
+.mod-questionnaire .paper .question-item .word {
+    margin: 0 10px 0 5px
+}
+
+.mod-questionnaire .paper .question-item .text-area {
+    width: 100%;
+    height: 90px
+}
+
+.mod-questionnaire .paper .q-err {
+    border: 1px dashed #f33
+}
+
+.mod-questionnaire .paper-success {
+    margin-top: 221px;
+    padding: 50px 0;
+}
+
+.mod-questionnaire .paper-success .hd {
+    text-align: center
+}
+
+.mod-questionnaire .paper-success h2 {
+    display: inline-block;
+    width: auto
+}
+
+.mod-questionnaire .paper-success > p {
+    line-height: 50px;
+    font-size: 15px;
+    color: #333;
+    text-align: center
+}
+
+.mod-questionnaire .paper-success > .content {
+    height: auto;
+    overflow: hidden;
+    margin-top: 50px;
+    background: #f9f9f9;
+    padding: 20px 220px;
+}
+
+.mod-questionnaire .paper-success > .content .qr-code-img {
+    width: 110px;
+    height: 110px;
+}
+
+.mod-questionnaire .paper-success > .content .qr-code-img img {
+    width: 100px;
+    height: 100px;
+    margin: 5px
+}
+
+.mod-questionnaire .paper-success > .content .desc {
+    margin-top: 5px;
+}
+
+.mod-questionnaire .paper-success > .content .desc h3 {
+    color: #333;
+    margin: 5px 0
+}
+
+.mod-questionnaire .paper-success > .content .desc > p {
+    font-size: 15px
+}
+
+.mod-questionnaire .paper-success > .content .desc i {
+    margin-right: 5px;
+    color: #26a2e8
+}
