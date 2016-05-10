@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>WeCenter</title>
+	<meta name="keywords" content="WeCenter,知识社区,社交社区,问答社区" />
+	<meta name="description" content="WeCenter 社交化知识社区"  />
+
+	<link href="http://test.ce.tcl.com/static/css/default/img/favicon.ico?v=20150226" rel="shortcut icon" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="http://test.ce.tcl.com/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="http://test.ce.tcl.com/static/css/icon.css" />
+
+	<link href="http://test.ce.tcl.com/static/css/default/common.css?v=20150226" rel="stylesheet" type="text/css" />
+	<link href="http://test.ce.tcl.com/static/css/default/link.css?v=20150226" rel="stylesheet" type="text/css" />
+	<link href="http://test.ce.tcl.com/static/js/plug_module/style.css?v=20150226" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="question.css">
+	<script type="text/javascript">
+		var _1614D129C1331B6DA7BB8AFFCCAA79DA="";
+		var G_POST_HASH=_1614D129C1331B6DA7BB8AFFCCAA79DA;
+		var G_INDEX_SCRIPT = "?/";
+		var G_SITE_NAME = "WeCenter";
+		var G_BASE_URL = "http://test.ce.tcl.com/?";
+		var G_STATIC_URL = "http://test.ce.tcl.com/static";
+		var G_UPLOAD_URL = "http://test.ce.tcl.com/uploads";
+		var G_USER_ID = "";
+		var G_USER_NAME = "";
+		var G_UPLOAD_ENABLE = "N";
+		var G_UNREAD_NOTIFICATION = 0;
+		var G_NOTIFICATION_INTERVAL = 100000;
+		var G_CAN_CREATE_TOPIC = "";
+		var G_ADVANCED_EDITOR_ENABLE = "Y";
+	</script>
+	<script src="http://test.ce.tcl.com/static/js/jquery.2.js?v=20150226" type="text/javascript"></script>
+	<script src="http://test.ce.tcl.com/static/js/jquery.form.js?v=20150226" type="text/javascript"></script>
+	<script src="http://test.ce.tcl.com/static/js/plug_module/plug-in_module.js?v=20150226" type="text/javascript"></script>
+	<script src="http://test.ce.tcl.com/static/js/aws.js?v=20150226" type="text/javascript"></script>
+	<script src="http://test.ce.tcl.com/static/js/aw_template.js?v=20150226" type="text/javascript"></script>
+	<script src="http://test.ce.tcl.com/static/js/app.js?v=20150226" type="text/javascript"></script>
+	<script type="text/javascript" src="http://test.ce.tcl.com/static/js/compatibility.js"></script>
+	<!--[if lte IE 8]>
+	<script type="text/javascript" src="http://test.ce.tcl.com/static/js/respond.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+<div class="aw-top-menu-wrap">
+	<div class="container">
+		<!-- logo -->
+		<div class="aw-logo hidden-xs">
+			<a href="http://test.ce.tcl.com"></a>
+		</div>
+		<!-- end logo -->
+		<!-- 搜索框 -->
+		<div class="aw-search-box  hidden-xs hidden-sm">
+			<form class="navbar-search" action="http://test.ce.tcl.com/?/search/" id="global_search_form" method="post">
+				<input class="form-control search-query" type="text" placeholder="搜索问题、话题或人" autocomplete="off" name="q" id="aw-search-query">
+				<span title="搜索" id="global_search_btns" onclick="$('#global_search_form').submit();"><i class="icon icon-search"></i></span>
+				<div class="aw-dropdown">
+					<div class="mod-body">
+						<p class="title">输入关键字进行搜索</p>
+						<ul class="aw-dropdown-list collapse"></ul>
+						<p class="search"><span>搜索:</span><a onclick="$('#global_search_form').submit();"></a></p>
+					</div>
+					<div class="mod-footer">
+						<a href="http://test.ce.tcl.com/?/publish" onclick="$('#header_publish').click();" class="pull-right btn btn-mini btn-success publish">发起问题</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- end 搜索框 -->
+		<!-- 导航 -->
+		<div class="aw-top-nav navbar">
+			<div class="navbar-header">
+			  <button class="navbar-toggle pull-left">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			</div>
+			<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+			  <ul class="nav navbar-nav">
+									<li><a href="http://test.ce.tcl.com" class=""><i class="icon icon-list"></i> 发现</a></li>
+
+				<!-- <li><a href="http://test.ce.tcl.com/?/question/" class="">问题</a></li>
+
+				<li><a href="http://test.ce.tcl.com/?/article/" class="">文章</a></li> -->
+
+				<li><a href="http://test.ce.tcl.com/?/topic/" class="active"><i class="icon icon-topic"></i> 话题</a></li>
+														<li>
+					<a style="font-weight:bold;">· · ·</a>
+					<div class="dropdown-list pull-right">
+						<ul id="extensions-nav-list">
+																						</ul>
+					</div>
+				</li>
+			  </ul>
+			</nav>
+		</div>
+		<!-- end 导航 -->
+		<!-- 用户栏 -->
+		<div class="aw-user-nav">
+			<!-- 登陆&注册栏 -->
+								<a class="login btn btn-normal btn-primary" href="http://test.ce.tcl.com/?/account/login/">登录</a>
+				<a class="register btn btn-normal btn-success" href="http://test.ce.tcl.com/?/account/register/">注册</a>								<!-- end 登陆&注册栏 -->
+		</div>
+		<!-- end 用户栏 -->
+		<!-- 发起 -->
+					<!-- end 发起 -->
+	</div>
+</div>
+<div class="aw-container-wrap">
+	<div class="container questionnaireReport" style="display: block;">
+		<div class="row">
+			<div class="aw-content-wrap clearfix">
+
+				<div class="results">
+					<div class="wrap">
+						<div class="title">
+							<h2>企大客户产品需求调研问卷</h2>
+						</div>
+						<div class="total">
+							<div class="views">
+								<label>
+									问卷查看数 <i>274</i>
+								</label>
+							</div>
+							<div class="finish">
+								<label>
+									完成人数 <i>42</i>
+								</label>
+							</div>
+							<div class="percent">
+								<label>
+									完成率
+									<i>15%</i>
+								</label>
+							</div>
+						</div>
+						<div class="report">
+							<div class="cat-containers">
+								<div class="wrap">
+									<h5>4：你使用企大课程的频度是怎样的？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<td>A：很频繁</td>
+												<td>1</td>
+												<td class="rate">
+													<label>
+														<span style="width: 2.60%"></span>
+														<em>2.60%</em>
+													</label>
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>B：经常</td>
+												<td>17</td>
+												<td class="rate">
+													<label>
+														<span style="width: 45.00%"></span>
+														<em>45.00%</em>
+													</label>
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>C：一般</td>
+												<td>18</td>
+												<td class="rate">
+													<label>
+														<span style="width: 47.00%"></span>
+														<em>47%</em>
+													</label>
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>D：很少</td>
+												<td>2</td>
+												<td class="rate">
+													<label>
+														<span style="width: 5.30%"></span>
+														<em>5.30%</em>
+													</label>
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<h5>5：你觉得目前企大课程是否满足你的需求？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>A：能满足公司需求</td>
+												<td>2</td>
+												<td class="rate">
+													<label>
+														<span style="width: 5.30%"></span>
+													</label>
+													5%
+												</td>
+											</tr>
+
+											<tr>
+												<td>B：基本满足公司需求</td>
+												<td>31</td>
+												<td class="rate">
+													<label>
+														<span style="width: 82.00%"></span>
+													</label>
+													82%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>C：大部分课程不符合公司需求</td>
+												<td>5</td>
+												<td class="rate">
+													<label>
+														<span style="width: 13.00%"></span>
+													</label>
+													13%
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<h5>6：你对目前企大课程的分类设置及显示是否满意？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>A：满意，分类清晰合理</td>
+												<td>5</td>
+												<td class="rate">
+													<label>
+														<span style="width: 13.00%"></span>
+													</label>
+													13%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>B：基本满意，能满足公司基本培训需求</td>
+												<td>27</td>
+												<td class="rate">
+													<label>
+														<span style="width: 71.00%"></span>
+													</label>
+													71%
+												</td>
+											</tr>
+
+											<tr>
+												<td>C：不太满意，希望课程分类能做屏蔽，只显示符合公司需求的课程</td>
+												<td>5</td>
+												<td class="rate">
+													<label>
+														<span style="width: 13.00%"></span>
+													</label>
+													13%
+												</td>
+											</tr>
+
+											<tr>
+												<td>D：其他</td>
+												<td>1</td>
+												<td class="rate">
+													<label>
+														<span style="width: 2.60%"></span>
+													</label>
+													2%
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<h5>1：贵公司内部使用的办公系统有哪些？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>A：OA</td>
+												<td>28</td>
+												<td class="rate">
+													<label>
+														<span style="width: 74.00%"></span>
+													</label>
+													74%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>B：邮箱</td>
+												<td>21</td>
+												<td class="rate">
+													<label>
+														<span style="width: 55.00%"></span>
+													</label>
+													55%
+												</td>
+											</tr>
+
+											<tr>
+												<td>C：公司网站</td>
+												<td>19</td>
+												<td class="rate">
+													<label>
+														<span style="width: 50.00%"></span>
+													</label>
+													50%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>D：其他</td>
+												<td>3</td>
+												<td class="rate">
+													<label>
+														<span style="width: 7.90%"></span>
+													</label>
+													7%
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<h5>2：贵公司使用的系统采用的是由哪个公司提供的？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>A：金蝶ERP</td>
+												<td>9</td>
+												<td class="rate">
+													<label>
+														<span style="width: 24.00%"></span>
+													</label>
+													24%
+												</td>
+											</tr>
+
+											<tr>
+												<td>B：金蝶云之家</td>
+												<td>1</td>
+												<td class="rate">
+													<label>
+														<span style="width: 2.60%"></span>
+													</label>
+													2%
+												</td>
+											</tr>
+
+											<tr>
+												<td>C：用友</td>
+												<td>8</td>
+												<td class="rate">
+													<label>
+														<span style="width: 21.00%"></span>
+													</label>
+													21%
+												</td>
+											</tr>
+
+											<tr>
+												<td>D：SAP</td>
+												<td>5</td>
+												<td class="rate">
+													<label>
+														<span style="width: 13.00%"></span>
+													</label>
+													13%
+												</td>
+											</tr>
+
+											<tr>
+												<td>E：ORACLE</td>
+												<td>3</td>
+												<td class="rate">
+													<label>
+														<span style="width: 7.90%"></span>
+													</label>
+													7%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>F：智邦国际</td>
+												<td>2</td>
+												<td class="rate">
+													<label>
+														<span style="width: 5.30%"></span>
+													</label>
+													5%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>G：蓝凌</td>
+												<td>1</td>
+												<td class="rate">
+													<label>
+														<span style="width: 2.60%"></span>
+													</label>
+													2%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>H：九思</td>
+												<td>0</td>
+												<td class="rate">
+													<label>
+														<span style="width: 0.00%"></span>
+													</label>
+													0%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>I：慧点</td>
+												<td>0</td>
+												<td class="rate">
+													<label>
+														<span style="width: 0.00%"></span>
+													</label>
+													0%
+												</td>
+											</tr>
+
+											<tr>
+												<td>J：金和</td>
+												<td>1</td>
+												<td class="rate">
+													<label>
+														<span style="width: 2.60%"></span>
+													</label>
+													2%
+												</td>
+											</tr>
+
+											<tr>
+												<td>K：公司自研</td>
+												<td>11</td>
+												<td class="rate">
+													<label>
+														<span style="width: 29.00%"></span>
+													</label>
+													29%
+												</td>
+											</tr>
+
+											<tr>
+												<td>L：其他</td>
+												<td>13</td>
+												<td class="rate">
+													<label>
+														<span style="width: 34.00%"></span>
+													</label>
+													34%
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<h5>3：你觉得从下列哪种方式登录企大云学习更好？</h5>
+									<table class="table table table-bordered">
+										<thead>
+											<tr>
+												<td>选项</td>
+												<td class="td-count">小计</td>
+												<td>比例</td>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="">
+												<td>A：公司官网</td>
+												<td>18</td>
+												<td class="rate">
+													<label>
+														<span style="width: 47.00%"></span>
+													</label>
+													47%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>B：公司OA系统</td>
+												<td>18</td>
+												<td class="rate">
+													<label>
+														<span style="width: 47.00%"></span>
+													</label>
+													47%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>C：企业官方微信</td>
+												<td>13</td>
+												<td class="rate">
+													<label>
+														<span style="width: 34.00%"></span>
+													</label>
+													34%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>D：企业APP</td>
+												<td>15</td>
+												<td class="rate">
+													<label>
+														<span style="width: 39.00%"></span>
+													</label>
+													39%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>E：企业官方微博</td>
+												<td>2</td>
+												<td class="rate">
+													<label>
+														<span style="width: 5.30%"></span>
+													</label>
+													5%
+												</td>
+											</tr>
+
+											<tr class="">
+												<td>F：其他</td>
+												<td>3</td>
+												<td class="rate">
+													<label>
+														<span style="width: 7.90%"></span>
+													</label>
+													7%
+												</td>
+											</tr>
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>本题有效填写数</td>
+												<td>38</td>
+												<td></td>
+											</tr>
+										</tfoot>
+									</table>
+
+									<div class="list">
+										7：你对企大云学习产品有什么建议（如：改进的地方、需要新增的功能）
+										<a class="btn-get-detail" href="javascript:void(0);" data-q-id="6">展开/折叠</a>
+										<div class="detail" style="display: block;">
+											<table class="table table table-bordered">
+												<thead>
+													<tr>
+														<td>序号</td>
+														<td class="td-visitor">被访者</td>
+														<td>答案文本</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="">
+														<td>1</td>
+														<td>某某</td>
+														<td>需要重视呢</td>
+													</tr>
+													<tr class="">
+														<td>2</td>
+														<td>施丹</td>
+														<td>社交功能，课件开发工具缺失</td>
+													</tr>
+													<tr class="">
+														<td>3</td>
+														<td>林立竹</td>
+														<td>课程较少、课程讲解较浅、个性域名网页经常自动跳转到企大默认的网页，导致内部账号登陆不上</td>
+													</tr>
+													<tr class="">
+														<td>4</td>
+														<td>李同和</td>
+														<td>没意见</td>
+													</tr>
+													<tr class="">
+														<td>5</td>
+														<td>孙云霞</td>
+														<td>后台系统功能待完善，很多功能不能满足用户需求。</td>
+													</tr>
+													<tr class="">
+														<td>6</td>
+														<td>宋文超</td>
+														<td>
+															1.希望针对公司需求，引进更高品质的课程，由专业人士讲解专业方面的相关知识。
+																2.希望课程的设置更加系统和完善。
+														</td>
+													</tr>
+													<tr class="">
+														<td>7</td>
+														<td>刘潇雨</td>
+														<td>增加国有企业党建内容</td>
+													</tr>
+													<tr class="">
+														<td>8</td>
+														<td>王丽秋</td>
+														<td>因为使用的时间比较短，暂时还没有什么建议</td>
+													</tr>
+													<tr class="">
+														<td>9</td>
+														<td>高芳</td>
+														<td>
+															我公司希望增加各岗位技能深入层次的培训内容，而不只是比较浅的东西，希望能学到比较实用的应用工具在工作中使用，在培训课件中可以学到新的理念。我们所看到的课件内容都是员工已经了解、所具备的知识技能，所以通过贵网站的课件并不能对员工技能有所提升。
+														</td>
+													</tr>
+													<tr>
+														<td>10</td>
+														<td>章伟</td>
+														<td>加点酒店行业或服务型行业背景课程；手机移动端可以增加考试功能</td>
+													</tr>
+													<tr class="">
+														<td>11</td>
+														<td>刘小锋</td>
+														<td>增加专业性课程，特别是系统性行业课程。</td>
+													</tr>
+													<tr>
+														<td>12</td>
+														<td>程仁杰</td>
+														<td>师说类课程太少。</td>
+													</tr>
+													<tr class="">
+														<td>13</td>
+														<td>陈秋君</td>
+														<td>暂时没有。</td>
+													</tr>
+													<tr class="">
+														<td>14</td>
+														<td>张亮</td>
+														<td>增加个人学习时长显示，更好的掌握自己的学习情况。</td>
+													</tr>
+													<tr>
+														<td>15</td>
+														<td>admin/hd</td>
+														<td>无</td>
+													</tr>
+													<tr class="">
+														<td>16</td>
+														<td>林华真</td>
+														<td>总体觉得还不错。建议暂时没有</td>
+													</tr>
+													<tr>
+														<td>17</td>
+														<td>王景虹</td>
+														<td>有些手机上网的数据没有办法统计</td>
+													</tr>
+													<tr>
+														<td>18</td>
+														<td>荀彥峰</td>
+														<td>希望将所有的课程都保留下来，而不是过一段时间有的课程就找不到了（已被企大删除)。</td>
+													</tr>
+													<tr>
+														<td>19</td>
+														<td>黄丽霞</td>
+														<td>实现在线实时培训，可以全员线上和老师互动授课</td>
+													</tr>
+													<tr>
+														<td>20</td>
+														<td>邹晚霞</td>
+														<td>报表功能最好能直观的看到学员学习的情况</td>
+													</tr>
+													<tr class="">
+														<td>21</td>
+														<td>朱莉</td>
+														<td>
+															1、与微信结合，可通过微信直接参与学习。
+																2、数据信息方面更完善（如未完成的课程也可在后台报表中显示以便提醒学员学习，以及更好的分析学员的学习轨迹。
+																3、可对课程选择性的屏蔽，某些人可学，某些人不可学。目前好像只能所有人屏蔽
+														</td>
+													</tr>
+													<tr class="">
+														<td>22</td>
+														<td>廖劲珊</td>
+														<td>
+															1、应该加入服装行业终端门店管理、顾客服务等相关的课程
+															2、不要单单做课程那么单一，加入一些信息模块。如，一些段子等等，在连同课程推荐给用户点击查看。就像您们在微信公众号发布的信息一样。
+															3、学习小组功能应该延伸至PC端进行操作，以便“老师”课程方便分享咨询。
+															4、必须要和微信对接。如，我可以把学习小组、课程推荐转发给朋友，朋友点击一下就直接能开看查看。查看完之后还可以留下学习记录，以便报表查询。如果点击进去的不是我司的员工，系统将不能为她进行下一步的服务。
+														</td>
+													</tr>
+													<tr>
+														<td>23</td>
+														<td>黎宏</td>
+														<td>暂时没有</td>
+													</tr>
+													<tr class="">
+														<td>24</td>
+														<td>范嘉</td>
+														<td>增加外语课程</td>
+													</tr>
+													<tr class="">
+														<td>25</td>
+														<td>刘玉平·</td>
+														<td>
+															1、希望能解决局域网学习的方案，现在好多的军工企业、保密单位都在自己的内网中作培训模块的链接，这种单位的情况就是单位不能上外网。同时也需要用租赁平台的方式来为员工培训。
+															2、可以实现线上、线下混合培训项目，并且可以导出所有数据报表来
+															3、根据线上、线下混合培训的数据，可以生成培训证书，并支持打印出来了，或者生成电子公章，作成培训证书
+															4、平台群发邮件的功能，可以绑定平台上学员的邮箱，给外网的邮件发送下课课程提醒功能
+															5、管理人员可以在后台对所有的课程进行重新分类和划分，对课程可以进行分类的屏蔽，显示等等管理
+															6、对学员可以实现分群体、分人群的进行课程屏蔽，而不是要么全屏蔽，要不全显示的
+															7、希望增加更多的好的课程数量
+														</td>
+													</tr>
+													<tr class="">
+														<td>26</td>
+														<td>wang</td>
+														<td>
+															1.建议首页的积分排行榜不要显示，以免泄露客户信息
+																2.账号的使用期限重新设置一下规则。有限期至29号，按常理说29号还可以用
+																3.发布的考试任务要可以做修改，以免出现意外，可以进行补救
+																4.考试答案公布方式应该有提交考卷后立即公布答案的方式
+																5.考试时间应该以因特网上的标准时间进行计时。
+																6.导入学员账号的模板应该多增添几项，如有效期限，密码等  学员手机邮箱可设置为非必填项
+																7.管理员的权限应该可以更改短信模板
+																8.因课程可设置快进，学员通过拖拽进度条的方式学习，建议报表中可以统计出观看某课程所花费的时间，
+														</td>
+													</tr>
+													<tr class="">
+														<td>27</td>
+														<td>马伟军</td>
+														<td>主要是服务欠缺：如新课程的引导、互动、学习氛围的营造</td>
+													</tr>
+													<tr class="">
+														<td>28</td>
+														<td>招思敏</td>
+														<td>还有可以改善的地方。</td>
+													</tr>
+													<tr>
+														<td>29</td>
+														<td>陈婕荣</td>
+														<td>
+															发布任务后可以修改任务内容描述，问卷调查可以以课程统计数据。课程缺乏课后练习，每门课程应给出一个与实际相符的案例或情景，让受训人分析或模拟情境，让学习到的知识能提升到更高层次，并快速运用到工作中。
+														</td>
+													</tr>
+													<tr class="">
+														<td>30</td>
+														<td>何卫</td>
+														<td>
+															1、用户组的设置维护不是很方便
+																2、课程吸引力可以更好
+																3、希望有更多零售企业用的营运、管理等方面的内容
+														</td>
+													</tr>
+													<tr class="">
+														<td>31</td>
+														<td>王迎春</td>
+														<td>信息系统方面的培训较少，医学方面的培训希望能增设些（如医学方面的礼仪、客服等方面）</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pagenav"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="aw-footer-wrap">
+	<div class="aw-footer">Copyright © 2016, All Rights Reserved <span class="hidden-xs">Powered By <a href="http://www.wecenter.com/?copyright" target="blank">WeCenter 3.1.8</a></span>
+	</div>
+</div>
+</body>
+</html>
