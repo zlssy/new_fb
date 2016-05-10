@@ -7,6 +7,8 @@ $negative-color = #e74c3c
 $editing-bg = #ecf0f1
 $editing-border = darken($editing-bg, 7%)
 
+$blue1 = #009AFF
+
 .fb-button {
   display: inline-block;
   margin: 0;
@@ -51,9 +53,9 @@ $editing-border = darken($editing-bg, 7%)
 }
 
 .fb-save-wrapper {
-  position: absolute;
+  /*position: absolute;
   right: 20px;
-  top: 10px;
+  top: 10px;*/
 }
 
 .fb-left {
@@ -63,7 +65,7 @@ $editing-border = darken($editing-bg, 7%)
 }
 
 .fb-right {
-  padding-top: 70px;
+  padding-top: 10px;
   margin-left: 320px;
   border-left: 1px solid #ddd;
   padding-left: 20px;
@@ -73,6 +75,8 @@ $editing-border = darken($editing-bg, 7%)
 
 .fb-no-response-fields {
   color: #999;
+  text-align:center;
+  border-top: 1px dashed #999
 }
 
 .fb-tabs {
@@ -88,7 +92,7 @@ $editing-border = darken($editing-bg, 7%)
 
 .fb-tabs li a {
   display: block;
-  padding: 10px;
+  padding: 6px 10px;
   border-radius: 5px 5px 0 0;
   font-size: 13px;
   cursor: pointer;
@@ -409,4 +413,37 @@ $editing-border = darken($editing-bg, 7%)
   border-top-style: dashed;
   border-top-width: 1px;
   border-bottom: 0;
+}
+
+.red, .important { color:red; }
+.gray { color:gray; }
+.question_head {
+  width: 100%;
+  margin-bottom: 12px;
+  overflow:hidden;
+}
+.question_head:after {
+  content: ' ';
+  clear: both;
+}
+.question_panel {
+  width:100%;
+  font-size:13px;
+  clear:both;
+}
+.question_panel:after{
+}
+.question_panel label, .question_panel input, .question_panel textarea {
+  float:left;
+}
+.question_panel label {
+  width:100px;
+  text-align:right;
+}
+.question_panel input {
+  width:50%;
+}
+.question_panel textarea {
+  width:50%;
+  height:100px;
 }

@@ -140,6 +140,8 @@ class BuilderView extends Backbone.View
     'click .fb-add-field-types a': 'addField'
     'mouseover .fb-add-field-types': 'lockLeftWrapper'
     'mouseout .fb-add-field-types': 'unlockLeftWrapper'
+    'input #title': 'forceRender'
+    'input #cnt1': 'forceRender'
 
   initialize: (options) ->
     {selector, @formBuilder, @bootstrapData} = options
@@ -156,14 +158,19 @@ class BuilderView extends Backbone.View
     @collection.bind 'destroy add reset', @hideShowNoResponseFields, @
     @collection.bind 'destroy', @ensureEditViewScrolled, @
 
+    title = @bootstrapData.title
+    content = @bootstrapData.content
+    fields = @bootstrapData.fields
     @render()
-    @collection.reset(@bootstrapData)
+    @collection.reset(fields)
+    $('input[name=title]').val title
+    $('textarea[name=content]').text content
     @bindSaveEvent()
 
   bindSaveEvent: ->
-    @formSaved = true
+    @formSaved = false
     @saveFormButton = @$el.find(".js-save-form")
-    @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
+    @saveFormButton.attr('disabled', false).text(Formbuilder.options.dict.SAVE_FORM)
 
     unless !Formbuilder.options.AUTOSAVE
       setInterval =>
@@ -325,6 +332,9 @@ class BuilderView extends Backbone.View
   unlockLeftWrapper: ->
     @$fbLeft.data('locked', false)
 
+  forceRender: ->
+    @collection.trigger('change')
+
   handleFormUpdate: ->
     return if @updatingBatch
     @formSaved = false
@@ -332,13 +342,22 @@ class BuilderView extends Backbone.View
 
   saveForm: (e) ->
     return if @formSaved
-    @formSaved = true
+    title = $('input[name=title]')
+    content = $('textarea[name=content').val()
+    if title.val() == ''
+      alert '问卷标题不能为空'
+      title.focus()
+      return 0
     @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
     @collection.sort()
-    payload = JSON.stringify fields: @collection.toJSON()
+    payload = JSON.stringify
+      title: title.val()
+      content: content
+      fields: @collection.toJSON()
 
     if Formbuilder.options.HTTP_ENDPOINT then @doAjaxSave(payload)
     @formBuilder.trigger 'save', payload
+    @formSaved = true
 
   doAjaxSave: (payload) ->
     $.ajax
@@ -375,7 +394,7 @@ class Formbuilder
     CHOICE_BUTTON: 'choice'
     HTTP_ENDPOINT: ''
     HTTP_METHOD: 'POST'
-    AUTOSAVE: true
+    AUTOSAVE: false
     CLEAR_FIELD_CONFIRM: false
 
     mappings:
@@ -398,7 +417,7 @@ class Formbuilder
 
     dict:
       ALL_CHANGES_SAVED: '问卷已保存'
-      SAVE_FORM: 'Save form'
+      SAVE_FORM: '保存'
       UNSAVED_CHANGES: '你还没有保存你的问卷，确定要离开？离开问卷数据将丢失。'
 
   @fields: {}

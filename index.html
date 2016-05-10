@@ -43,7 +43,7 @@
     $(function(){
       fb = new Formbuilder({
         selector: '.fb-main',
-        bootstrapData: []
+        bootstrapData: {"title":"111","content":"222","fields":[{"label":"2222","field_type":"radio","required":true,"field_options":{"options":[{"label":"111","checked":false},{"label":"3333","checked":false}]},"cid":"c2"},{"label":"来个多选","field_type":"checkboxes","required":true,"field_options":{"options":[{"label":"bbb","checked":false},{"label":"ddd","checked":false}]},"cid":"c6"}]}
       });
 
       fb.on('save', function(payload){
