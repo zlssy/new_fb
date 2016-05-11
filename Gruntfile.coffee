@@ -1,4 +1,4 @@
-ALL_TASKS = ['jst:all', 'coffee:all', 'concat:all', 'stylus:all', 'clean:compiled']
+ALL_TASKS = ['jst:all', 'coffee:all', 'concat:all', 'stylus:all', 'copy', 'clean:compiled']
 
 # formbuilder.js must be compiled in this order:
 # 1. rivets-config
@@ -30,6 +30,8 @@ module.exports = (grunt) ->
     distFolder: 'dist'
     vendorFolder: 'vendor'
     testFolder: 'test'
+    outerSite: '../ce_center/static/js/questionnaire'
+    outerSiteCss: '../ce_center/static/css/default'
 
     jst:
       all:
@@ -56,9 +58,25 @@ module.exports = (grunt) ->
       all:
         files:
           '<%= distFolder %>/formbuilder.js': '<%= compiledFolder %>/*.js'
+          '<%= outerSite %>/index.js': '<%= compiledFolder %>/*.js'
           '<%= vendorFolder %>/js/vendor.js': [
             'bower_components/ie8-node-enum/index.js'
             'bower_components/jquery/dist/jquery.js'
+            'bower_components/jquery-ui/ui/jquery.ui.core.js'
+            'bower_components/jquery-ui/ui/jquery.ui.widget.js'
+            'bower_components/jquery-ui/ui/jquery.ui.mouse.js'
+            'bower_components/jquery-ui/ui/jquery.ui.draggable.js'
+            'bower_components/jquery-ui/ui/jquery.ui.droppable.js'
+            'bower_components/jquery-ui/ui/jquery.ui.sortable.js'
+            'bower_components/jquery.scrollWindowTo/index.js'
+            'bower_components/underscore/underscore-min.js'
+            'bower_components/underscore.mixin.deepExtend/index.js'
+            'bower_components/rivets/dist/rivets.js'
+            'bower_components/backbone/backbone.js'
+            'bower_components/backbone-deep-model/src/deep-model.js'
+          ]
+          '<%= outerSite %>/lib.js': [
+            'bower_components/ie8-node-enum/index.js'
             'bower_components/jquery-ui/ui/jquery.ui.core.js'
             'bower_components/jquery-ui/ui/jquery.ui.widget.js'
             'bower_components/jquery-ui/ui/jquery.ui.mouse.js'
@@ -94,6 +112,7 @@ module.exports = (grunt) ->
         files:
           '<%= compiledFolder %>/formbuilder.css': '<%= srcFolder %>/styles/**.styl'
           '<%= distFolder %>/formbuilder.css': '<%= compiledFolder %>/**/*.css'
+          '<%= outerSiteCss %>/questionnaire.css': '<%= compiledFolder %>/**/*.css'
 
     clean:
       compiled:
@@ -117,6 +136,11 @@ module.exports = (grunt) ->
       unit:
         configFile: '<%= testFolder %>/karma.conf.coffee'
 
+  grunt.registerTask 'copy', ->
+    content = grunt.file.read 'bower_components/font-awesome/css/font-awesome.css', {'encoding' : 'utf-8'}    
+    content = content.replace(/(..\/fonts\/)/g, '../$1')
+    content = require('clean-css').process(content, {})
+    grunt.file.write grunt.config('outerSiteCss') + '/vendor.css',  content, {'encoding' : 'utf-8'}
 
   grunt.registerTask 'default', ALL_TASKS
   grunt.registerTask 'mobile_friendly', ['jst:all', 'coffee:all', 'concat:mobile_friendly', 'stylus:all', 'clean:compiled']

@@ -345,10 +345,14 @@ class BuilderView extends Backbone.View
     title = $('input[name=title]')
     content = $('textarea[name=content').val()
     if title.val() == ''
-      alert '问卷标题不能为空'
+      show_alert '问卷标题不能为空'
       title.focus()
       return 0
-    @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
+    check_result = check_options @collection.models
+    if(check_result != true)
+      check_result && @createAndShowEditView check_result
+      AWS && AWS.show_tips && AWS.show_tips '必须填写题目并且至少要填一个选项'
+      return 0
     @collection.sort()
     payload = JSON.stringify
       title: title.val()
@@ -358,6 +362,7 @@ class BuilderView extends Backbone.View
     if Formbuilder.options.HTTP_ENDPOINT then @doAjaxSave(payload)
     @formBuilder.trigger 'save', payload
     @formSaved = true
+    @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
 
   doAjaxSave: (payload) ->
     $.ajax
@@ -443,6 +448,17 @@ class Formbuilder
     @mainView = new BuilderView args
 
 window.Formbuilder = Formbuilder
+show_alert = (m) ->
+  if AWS then AWS.alert(m) else alert(m)
+check_options = (opts)->
+  for opt in opts
+    return opt if !opt.attributes or opt.attributes.label == ''
+    return opt if !opt.attributes.field_options or !opt.attributes.field_options.options or opt.attributes.field_options.options.length == 0
+    has = false
+    for o in opt.attributes.field_options.options
+      has = true if o.label != ''
+    return opt if !has
+  return true
 
 if module?
   module.exports = Formbuilder

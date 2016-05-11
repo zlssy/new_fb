@@ -8,6 +8,7 @@ $editing-bg = #ecf0f1
 $editing-border = darken($editing-bg, 7%)
 
 $blue1 = #009AFF
+$hover_button = #ccc
 
 .fb-button {
   display: inline-block;
@@ -38,6 +39,12 @@ $blue1 = #009AFF
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
   opacity: .65;
   cursor: default;
+}
+
+a.fb-button {
+  &:hover {
+    color: $hover_button;
+  }
 }
 
 .fb-clear {
@@ -136,6 +143,10 @@ $blue1 = #009AFF
 
   &:nth-child(odd) {
     margin-right: 3%;
+  }
+
+  &:hover {
+    color:#D3DBE2;
   }
 
   .symbol {
@@ -445,5 +456,37 @@ $blue1 = #009AFF
 }
 .question_panel textarea {
   width:50%;
-  height:100px;
+  height:50px;
+}
+#editor {
+  margin-left:100px;
+  border:solid 1px $hover_button;
+  border-radius: 4px;
+}
+
+@keyframes hide {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100px;
+    display: none;
+  }
+}
+@keyframes show {
+  0% {
+    top: -100px;
+    display: block;
+  }
+  100% {
+    top: 0
+  }
+}
+#r_tips.out {
+  animation: hide .5s linear;
+  animation-fill-mode: both;
+}
+#r_tips.in {
+  animation: show .5s linear;
+  animation-fill-mode: both;
 }
