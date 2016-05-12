@@ -348,6 +348,9 @@ class BuilderView extends Backbone.View
       show_alert '问卷标题不能为空'
       title.focus()
       return 0
+    if @collection.models.length == 0
+      show_alert '您一个题目都还没添加哦~'
+      return 0
     check_result = check_options @collection.models
     if(check_result != true)
       check_result && @createAndShowEditView check_result
@@ -361,8 +364,18 @@ class BuilderView extends Backbone.View
 
     if Formbuilder.options.HTTP_ENDPOINT then @doAjaxSave(payload)
     @formBuilder.trigger 'save', payload
-    @formSaved = true
-    @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
+    @updateFormButton 'saving'
+
+  updateFormButton: (s)->
+    if s is 'saving'
+      @formSaved = true
+      @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.SAVEING)
+    if s is 'saved'
+      @formSaved = true
+      @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
+    if s is 'ready'
+      @formSaved = false
+      @saveFormButton.attr('disabled', false).text(Formbuilder.options.dict.SAVE_FORM)
 
   doAjaxSave: (payload) ->
     $.ajax
@@ -422,6 +435,7 @@ class Formbuilder
 
     dict:
       ALL_CHANGES_SAVED: '问卷已保存'
+      SAVEING: '正在保存...'
       SAVE_FORM: '保存'
       UNSAVED_CHANGES: '你还没有保存你的问卷，确定要离开？离开问卷数据将丢失。'
 
@@ -452,12 +466,14 @@ show_alert = (m) ->
   if AWS then AWS.alert(m) else alert(m)
 check_options = (opts)->
   for opt in opts
-    return opt if !opt.attributes or opt.attributes.label == ''
-    return opt if !opt.attributes.field_options or !opt.attributes.field_options.options or opt.attributes.field_options.options.length == 0
-    has = false
-    for o in opt.attributes.field_options.options
-      has = true if o.label != ''
-    return opt if !has
+    if opt.attributes.field_type isnt 'section_break'
+      return opt if opt.attributes.label == ''
+    return opt if (opt.attributes.field_type is 'radio' or opt.attributes.field_type is 'checkboxes') and (!opt.attributes.field_options or !opt.attributes.field_options.options or opt.attributes.field_options.options.length == 0)
+    if opt.attributes.field_type is 'radio' or opt.attributes.field_type is 'checkboxes'
+      has = false
+      for o in opt.attributes.field_options.options
+        has = true if o.label != ''
+      return opt if !has
   return true
 
 if module?
