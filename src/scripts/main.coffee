@@ -354,7 +354,7 @@ class BuilderView extends Backbone.View
     check_result = check_options @collection.models
     if(check_result != true)
       check_result && @createAndShowEditView check_result
-      AWS && AWS.show_tips && AWS.show_tips '必须填写题目并且至少要填一个选项'
+      AWS && AWS.show_tips && AWS.show_tips '必须填写题目,至少要填一个选项'
       return 0
     @collection.sort()
     payload = JSON.stringify
@@ -463,7 +463,7 @@ class Formbuilder
 
 window.Formbuilder = Formbuilder
 show_alert = (m) ->
-  if AWS then AWS.alert(m) else alert(m)
+  if AWS then AWS.show_tips(m, 5000) else alert(m)
 check_options = (opts)->
   for opt in opts
     if opt.attributes.field_type isnt 'section_break'
