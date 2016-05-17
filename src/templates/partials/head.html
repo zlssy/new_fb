@@ -1,10 +1,14 @@
 <div class="question_head">
 	<div class="question_panel">
 		<label for="title"><span class="important">*</span>问卷标题：</label>
-		<div class="head_right"><input type="text" id="title" name="title" /></div>
+		<div class="head_right"><input type="text" id="title" name="title" class="full" /></div>
 	</div>
 	<div class="question_panel">
 		<label for="cnt1" class="gray">问卷说明：</label>
 		<div id="editor"><textarea id="cnt1" name="content" class="editor"></textarea></div>
+	</div>
+	<div class="question_panel mt-4">
+		<label for="start_date"><span class="important">*</span>起止时间：</label>
+		<div><input type="text" id="start_date" name="start_date" placeholder="开始时间" readonly="readonly" /><span class="date_spliter">&nbsp;-&nbsp;</span><input type="text" id="end_date" name="end_date" placeholder="结束时间" readonly="readonly" /></div>
 	</div>
 </div>

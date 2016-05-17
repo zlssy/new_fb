@@ -429,6 +429,7 @@ a.fb-button {
 
 .red, .important { color:red; }
 .gray { color:gray; }
+.mt-4 { margin-top: 4px; }
 .question_head {
   width: 100%;
   margin-bottom: 12px;
@@ -445,7 +446,7 @@ a.fb-button {
 }
 .question_panel:after{
 }
-.question_panel label, .question_panel input, .question_panel textarea {
+.question_panel label, .question_panel input, .question_panel textarea, .date_spliter {
   float:left;
 }
 .question_panel label {
@@ -453,8 +454,11 @@ a.fb-button {
   text-align:right;
 }
 .question_panel input {
-  width:100%;
   border:solid 1px $hover_button;
+  
+  &.full {
+    width: 100%;
+  }
 }
 .question_panel textarea {
   width:50%;

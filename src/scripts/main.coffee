@@ -344,9 +344,19 @@ class BuilderView extends Backbone.View
     return if @formSaved
     title = $('input[name=title]')
     content = $('textarea[name=content').val()
+    start_date = $('#start_date')
+    end_date = $('#end_date')
     if title.val() == ''
       show_alert '问卷标题不能为空'
       title.focus()
+      return 0
+    if start_date.val() == ''
+      show_alert '请填写问卷开始时间'
+      start_date.focus()
+      return 0
+    if end_date.val() == ''
+      show_alert '请填写问卷结束时间'
+      end_date.focus()
       return 0
     if @collection.models.length == 0
       show_alert '您一个题目都还没添加哦~'
@@ -360,6 +370,8 @@ class BuilderView extends Backbone.View
     payload = JSON.stringify
       title: title.val()
       content: content
+      starttime: start_date.val()
+      endtime: end_date.val()
       fields: @collection.toJSON()
 
     if Formbuilder.options.HTTP_ENDPOINT then @doAjaxSave(payload)
