@@ -511,7 +511,7 @@ check_options = (opts)->
       for o in opt.attributes.field_options.options
         has = true if o.label != ''
       msg.push ' 至少要填一个选项' if !has
-    r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg
+    r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg.length
   if r.length then r else true
 
 if module?
