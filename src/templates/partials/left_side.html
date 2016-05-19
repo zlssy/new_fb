@@ -1,10 +1,12 @@
 ﻿<div class='fb-left'>
   <ul class='fb-tabs'>
-    <li class='active'><a data-target='#addField'>添加题目</a></li>
+  	<li class="active"><a data-target="#baseField">基本设置</a></li>
+    <li><a data-target='#addField'>添加题目</a></li>
     <li><a data-target='#editField'>编辑题目</a></li>
   </ul>
 
   <div class='fb-tab-content'>
+  	<%= Formbuilder.templates['partials/base_field']() %>
     <%= Formbuilder.templates['partials/add_field']() %>
     <%= Formbuilder.templates['partials/edit_field']() %>
   </div>

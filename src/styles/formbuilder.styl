@@ -203,6 +203,11 @@ a.fb-button {
   margin: 0;
   border-radius: 3px;
 }
+.fb-field-wrapper.error {  
+  & .subtemplate-wrapper{
+    border-color: red;
+  }
+}
 
 .fb-field-wrapper .actions-wrapper {
   display: none;
@@ -427,9 +432,11 @@ a.fb-button {
   border-bottom: 0;
 }
 
-.red, .important { color:red; }
-.gray { color:gray; }
+.red, .important, .errormsg { color:red; }
+.errormsg { font-size:11px; }
+.gray { color:#BBB; }
 .mt-4 { margin-top: 4px; }
+.hide { display:none; }
 .question_head {
   width: 100%;
   margin-bottom: 12px;
@@ -443,6 +450,11 @@ a.fb-button {
   width:100%;
   font-size:13px;
   clear:both;
+}
+.question_head h1 {
+  font-size:large;
+  font-weight: bold;
+  text-align: center;
 }
 .question_panel:after{
 }
@@ -458,6 +470,14 @@ a.fb-button {
   
   &.full {
     width: 100%;
+    padding: 0 8px;
+    &.error {
+      outline: none;
+      border: solid 1px red;
+    }
+  }
+  &:focus {
+    border: solid 1px $hover_button;
   }
 }
 .question_panel textarea {
@@ -472,6 +492,14 @@ a.fb-button {
   border:solid 1px $hover_button;
   border-radius: 4px;
 }
+.q_date { padding: 0 8px; }
+.base-panel {
+  font-size:12px;
+}
+.fb-main .form-control {
+  height: 34px;
+}
+
 
 @keyframes hide {
   0% {

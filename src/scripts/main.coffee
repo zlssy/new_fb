@@ -34,7 +34,7 @@ class ViewFieldView extends Backbone.View
     @listenTo @model, "destroy", @remove
 
   render: ->
-    @$el.addClass('response-field-' + @model.get(Formbuilder.options.mappings.FIELD_TYPE))
+    @$el.addClass('response-field-' + @model.get(Formbuilder.options.mappings.FIELD_TYPE)).removeClass('error')
         .data('cid', @model.cid)
         .html(Formbuilder.templates["view/base#{if !@model.is_input() then '_non_input' else ''}"]({rf: @model}))
 
@@ -144,7 +144,7 @@ class BuilderView extends Backbone.View
     'input #cnt1': 'forceRender'
 
   initialize: (options) ->
-    {selector, @formBuilder, @bootstrapData} = options
+    {selector, @formBuilder, @bootstrapData, callback} = options
 
     # This is a terrible idea because it's not scoped to this view.
     if selector?
@@ -161,10 +161,16 @@ class BuilderView extends Backbone.View
     title = @bootstrapData.title
     content = @bootstrapData.content
     fields = @bootstrapData.fields
+    starttime = @bootstrapData.starttime
+    endtime = @bootstrapData.endtime
     @render()
     @collection.reset(fields)
     $('input[name=title]').val title
     $('textarea[name=content]').text content
+    $('#start_date').val starttime
+    $('#end_date').val endtime
+
+    _.isFunction(callback) && callback(@)
     @bindSaveEvent()
 
   bindSaveEvent: ->
@@ -218,6 +224,13 @@ class BuilderView extends Backbone.View
 
     if target == '#editField' && !@editView && (first_model = @collection.models[0])
       @createAndShowEditView(first_model)
+
+    if target == '#baseField'
+      $('#q_edit_view').show();
+      $('#q_see_view').hide();
+    else
+      $('#q_see_view').html('<h1>'+$('#title').val()+'</h1>\r\n<div class="desc gray">'+$('#cnt1').text()+'</div>').show();
+      $('#q_edit_view').hide();
 
   addOne: (responseField, _, options) ->
     view = new ViewFieldView
@@ -316,6 +329,12 @@ class BuilderView extends Backbone.View
     @scrollLeftWrapper($responseFieldEl)
     return @
 
+  mode_error: (m, e)->
+    $wrapper = @$el.find(".fb-field-wrapper").filter( -> $(@).data('cid') == m.cid )
+    $wrapper.addClass 'error'
+    $error_parent = $wrapper.find('.cover').siblings('label')
+    if $error_parent.find('.errormsg').size() then $error_parent.find('.errormsg').html e else $error_parent.append '<span class="errormsg">'+e+'</span>' if e
+
   ensureEditViewScrolled: ->
     return unless @editView
     @scrollLeftWrapper $(".fb-field-wrapper.editing")
@@ -347,24 +366,29 @@ class BuilderView extends Backbone.View
     start_date = $('#start_date')
     end_date = $('#end_date')
     if title.val() == ''
+      $('a[data-target="#baseField"]').trigger('click')
       show_alert '问卷标题不能为空'
-      title.focus()
+      title.addClass('error').focus()
       return 0
     if start_date.val() == ''
+      $('a[data-target="#baseField"]').trigger('click')
       show_alert '请填写问卷开始时间'
       start_date.focus()
+      start_date.parents('.input-group').addClass('has-error')
       return 0
     if end_date.val() == ''
+      $('a[data-target="#baseField"]').trigger('click')
       show_alert '请填写问卷结束时间'
       end_date.focus()
+      end_date.parents('.input-group').addClass('has-error')
       return 0
     if @collection.models.length == 0
       show_alert '您一个题目都还没添加哦~'
       return 0
     check_result = check_options @collection.models
     if(check_result != true)
-      check_result && @createAndShowEditView check_result
-      AWS && AWS.show_tips && AWS.show_tips '必须填写题目,至少要填一个选项'
+      @mode_error (if first then item.mod else first = item.mod), item.msg for item in check_result
+      @createAndShowEditView first
       return 0
     @collection.sort()
     payload = JSON.stringify
@@ -477,16 +501,18 @@ window.Formbuilder = Formbuilder
 show_alert = (m) ->
   if AWS then AWS.show_tips(m, 5000) else alert(m)
 check_options = (opts)->
+  r = []
   for opt in opts
+    msg = []
     if opt.attributes.field_type isnt 'section_break'
-      return opt if opt.attributes.label == ''
-    return opt if (opt.attributes.field_type is 'radio' or opt.attributes.field_type is 'checkboxes') and (!opt.attributes.field_options or !opt.attributes.field_options.options or opt.attributes.field_options.options.length == 0)
+      msg.push '标题不能为空' if opt.attributes.label == ''
     if opt.attributes.field_type is 'radio' or opt.attributes.field_type is 'checkboxes'
       has = false
       for o in opt.attributes.field_options.options
         has = true if o.label != ''
-      return opt if !has
-  return true
+      msg.push ' 至少要填一个选项' if !has
+    r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg
+  if r.length then r else true
 
 if module?
   module.exports = Formbuilder
