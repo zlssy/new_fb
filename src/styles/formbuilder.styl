@@ -78,7 +78,7 @@ a.fb-button {
   border-left: 1px solid #ddd;
   padding-left: 20px;
   min-height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .fb-no-response-fields {
@@ -440,32 +440,30 @@ a.fb-button {
 .question_head {
   width: 100%;
   margin: 12px 0;
-  overflow:hidden;
-}
-.question_head:after {
-  content: ' ';
-  clear: both;
+
 }
 .question_panel {
   width:100%;
   font-size:13px;
-  clear:both;
-  overflow:hidden;
   margin-bottom: 12px;
+  display: table;
 }
 .question_head h1 {
   font-size:large;
   font-weight: bold;
   text-align: center;
 }
-.question_panel:after{
-}
-.question_panel label, .question_panel input, .question_panel textarea, .date_spliter {
-  float:left;
-}
 .question_panel label {
-  width:100px;
+  width:15%;
   text-align:right;
+  display: inline-block;
+  &.vtop {
+    vertical-align: top;
+  }
+}
+.question_panel .head_right {
+  width: 84%;
+  display: inline-block;
 }
 .question_panel input {
   border:solid 1px $hover_button;
@@ -486,11 +484,7 @@ a.fb-button {
   width:50%;
   height:50px;
 }
-.head_right {
-  margin-left:100px;
-}
 #editor {
-  margin-left:100px;
   border:solid 1px $hover_button;
   border-radius: 4px;
 }
