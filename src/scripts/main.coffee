@@ -444,7 +444,8 @@ class Formbuilder
       x?.replace(/\n/g, '<br />')
 
   @options:
-    BUTTON_CLASS: 'fb-button'
+    # BUTTON_CLASS: 'fb-button'
+    BUTTON_CLASS: 'btn btn-primary btn-lg'
     CHOICE_BUTTON: 'choice'
     HTTP_ENDPOINT: ''
     HTTP_METHOD: 'POST'
@@ -499,7 +500,8 @@ class Formbuilder
 
 window.Formbuilder = Formbuilder
 show_alert = (m) ->
-  if AWS then AWS.show_tips(m, 5000) else alert(m)
+  # if AWS then AWS.show_tips(m, 5000) else alert(m)
+  if AWS then AWS.alert(m) else alert(m)
 check_options = (opts)->
   r = []
   for opt in opts
