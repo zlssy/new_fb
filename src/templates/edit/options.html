@@ -1,4 +1,4 @@
-﻿<div class='fb-edit-section-header'>选项</div>
+﻿<div>选项</div>
 
 <% if (typeof includeBlank !== 'undefined'){ %>
   <label>
@@ -10,8 +10,8 @@
 <div class='option' data-rv-each-option='model.<%= Formbuilder.options.mappings.OPTIONS %>'>
   <input type="checkbox" class='js-default-updated' data-rv-checked="option:checked" />
   <input type="text" data-rv-input="option:label" class='option-label-input' />
-  <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>" title="添加新选项"><i class='fa fa-plus-circle'></i></a>
-  <a class="js-remove-option <%= Formbuilder.options.BUTTON_CLASS %>" title="删除选项"><i class='fa fa-minus-circle'></i></a>
+  <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS_SM %>" title="添加新选项"><i class='fa fa-plus-circle'></i></a>
+  <a class="js-remove-option <%= Formbuilder.options.BUTTON_CLASS_SM %>" title="删除选项"><i class='fa fa-minus-circle'></i></a>
 </div>
 
 <% if (typeof includeOther !== 'undefined'){ %>
@@ -21,6 +21,6 @@
   </label>
 <% } %>
 
-<div class='fb-bottom-add'>
-  <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>">添加新选项</a>
+<div class='fb-bottom-add' style="display:<%= rf.get(Formbuilder.options.mappings.OPTIONS).length ? " none":""%>;">
+  <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS_SM %>">添加新选项</a>
 </div>

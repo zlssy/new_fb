@@ -13,6 +13,9 @@
   edit: """
   """
 
+  other: """
+  """
+
   addButton: """
     <span class='symbol'><span class='fa fa-minus'></span></span> 分割线
   """

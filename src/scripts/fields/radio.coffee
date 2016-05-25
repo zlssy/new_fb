@@ -26,7 +26,10 @@
   """
 
   edit: """
-    <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>
+    <%= Formbuilder.templates['edit/options']({ includeOther: true, rf: rf }) %>
+  """
+
+  other: """
   """
 
   addButton: """

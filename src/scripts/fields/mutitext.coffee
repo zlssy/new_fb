@@ -3,11 +3,17 @@ Formbuilder.registerField 'mutitext',
   order: 40
   name: '简答题'
 
+  # view: """
+  #   <textarea class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />
+  # """
   view: """
-    <textarea class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />
+    <textarea class='rf-size-medium' />
   """
 
   edit: """
+  """
+
+  other: """
     <%= Formbuilder.templates['edit/min_max_length']() %>
   """
 
@@ -16,5 +22,4 @@ Formbuilder.registerField 'mutitext',
   """
 
   defaultAttributes: (attrs) ->
-    attrs.field_options.size = 'medium'
     attrs

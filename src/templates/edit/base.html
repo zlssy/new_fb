@@ -1,3 +1,11 @@
-﻿<%= Formbuilder.templates['edit/base_header']() %>
+﻿<!-- <%= Formbuilder.templates['edit/base_header']() %> -->
 <%= Formbuilder.templates['edit/common']() %>
 <%= Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) %>
+<div class='fb-edit-section-header'>校验</div>
+<div class='fb-common-wrapper'>
+  <div class='fb-common-checkboxes'>
+    <%= Formbuilder.templates['edit/checkboxes']() %>
+  </div>
+  <%= Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].other() %>
+  <div class='fb-clear'></div>
+</div>

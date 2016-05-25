@@ -1,7 +1,7 @@
 ﻿Formbuilder.registerField 'dropdown',
 
   order: 20
-  name: '选择题'
+  name: '下拉题'
 
   view: """
     <select>
@@ -18,11 +18,14 @@
   """
 
   edit: """
-    <%= Formbuilder.templates['edit/options']({ includeBlank: true }) %>
+    <%= Formbuilder.templates['edit/options']({ includeBlank: true, rf: rf }) %>
+  """
+
+  other: """
   """
 
   addButton: """
-    <span class="symbol"><span class="fa fa-caret-down"></span></span> 选择题
+    <span class="symbol"><span class="fa fa-caret-down"></span></span> 下拉题
   """
 
   defaultAttributes: (attrs) ->

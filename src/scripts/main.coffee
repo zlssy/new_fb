@@ -121,13 +121,14 @@ class EditFieldView extends Backbone.View
 
   defaultUpdated: (e) ->
     $el = $(e.currentTarget)
-
     unless @model.get(Formbuilder.options.mappings.FIELD_TYPE) == 'checkboxes' # checkboxes can have multiple options selected
       @$el.find(".js-default-updated").not($el).attr('checked', false).trigger('change')
 
     @forceRender()
 
-  forceRender: ->
+  forceRender: (e)->
+    $el = $(this.el)
+    $el.find('.fb-bottom-add').toggle(!@model.get(Formbuilder.options.mappings.OPTIONS).length)
     @model.trigger('change')
 
 
@@ -225,12 +226,12 @@ class BuilderView extends Backbone.View
     if target == '#editField' && !@editView && (first_model = @collection.models[0])
       @createAndShowEditView(first_model)
 
-    if target == '#baseField'
-      $('#q_edit_view').show();
-      $('#q_see_view').hide();
-    else
-      $('#q_see_view').html('<h1>'+$('#title').val()+'</h1>\r\n<div class="desc gray">'+$('#cnt1').text()+'</div>').show();
-      $('#q_edit_view').hide();
+    # if target == '#baseField'
+    #   $('#q_edit_view').show();
+    #   $('#q_see_view').hide();
+    # else
+    #   $('#q_see_view').html('<h1>'+$('#title').val()+'</h1>\r\n<div class="desc gray">'+$('#cnt1').text()+'</div>').show();
+    #   $('#q_edit_view').hide();
 
   addOne: (responseField, _, options) ->
     view = new ViewFieldView
@@ -446,6 +447,8 @@ class Formbuilder
   @options:
     # BUTTON_CLASS: 'fb-button'
     BUTTON_CLASS: 'btn btn-primary btn-lg'
+    BUTTON_CLASS_XS: 'btn btn-primary btn-xs'
+    BUTTON_CLASS_SM: 'btn btn-primary btn-sm'
     CHOICE_BUTTON: 'choice'
     HTTP_ENDPOINT: ''
     HTTP_METHOD: 'POST'
@@ -471,17 +474,17 @@ class Formbuilder
       LENGTH_UNITS: 'field_options.min_max_length_units'
 
     dict:
-      ALL_CHANGES_SAVED: '问卷已保存'
-      SAVEING: '正在保存...'
-      SAVE_FORM: '保存'
-      UNSAVED_CHANGES: '你还没有保存你的问卷，确定要离开？离开问卷数据将丢失。'
+      ALL_CHANGES_SAVED: '问卷已发布'
+      SAVEING: '正在发布...'
+      SAVE_FORM: '发布'
+      UNSAVED_CHANGES: '你还没有发布你的问卷，确定要离开？离开问卷数据将丢失。'
 
   @fields: {}
   @inputFields: {}
   @nonInputFields: {}
 
   @registerField: (name, opts) ->
-    for x in ['view', 'edit']
+    for x in ['view', 'edit', 'other']
       opts[x] = _.template(opts[x])
 
     opts.field_type = name
@@ -506,14 +509,16 @@ check_options = (opts)->
   r = []
   for opt in opts
     msg = []
-    if opt.attributes.field_type isnt 'section_break'
+    fideltype = opt.attributes.field_type
+    if fideltype isnt 'section_break'
       msg.push '标题不能为空' if opt.attributes.label == ''
-    if opt.attributes.field_type is 'radio' or opt.attributes.field_type is 'checkboxes'
+    if fideltype is 'radio' or fideltype is 'checkboxes'
       has = false
       for o in opt.attributes.field_options.options
         has = true if o.label != ''
       msg.push ' 至少要填一个选项' if !has
     r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg.length
+
   if r.length then r else true
 
 if module?

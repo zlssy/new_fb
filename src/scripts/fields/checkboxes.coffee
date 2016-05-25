@@ -25,7 +25,11 @@
   """
 
   edit: """
-    <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>
+    <%= Formbuilder.templates['edit/options']({ includeOther: true,rf: rf }) %>
+  """
+
+  other: """
+    <%= Formbuilder.templates['edit/min_max']() %>
   """
 
   addButton: """
