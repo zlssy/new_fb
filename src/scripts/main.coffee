@@ -385,9 +385,9 @@ class BuilderView extends Backbone.View
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
-    if (@getDateFromStr end_date.val()) < (@getDateFromStr start_date.val())
+    if (@getDateFromStr end_date.val()) <= (@getDateFromStr start_date.val())
       $('a[data-target="#baseField"]').trigger('click')
-      show_alert '结束时间不能早于开始时间'
+      show_alert '结束时间必须晚于开始时间'
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
