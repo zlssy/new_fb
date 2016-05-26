@@ -173,6 +173,7 @@ class BuilderView extends Backbone.View
 
     _.isFunction(callback) && callback(@)
     @bindSaveEvent()
+    @getDateFromStr = options.getDateFromStr || (str) -> (new Date str).getTime()
 
   bindSaveEvent: ->
     @formSaved = false
@@ -377,9 +378,16 @@ class BuilderView extends Backbone.View
       start_date.focus()
       start_date.parents('.input-group').addClass('has-error')
       return 0
+    
     if end_date.val() == ''
       $('a[data-target="#baseField"]').trigger('click')
       show_alert '请填写问卷结束时间'
+      end_date.focus()
+      end_date.parents('.input-group').addClass('has-error')
+      return 0
+    if (@getDateFromStr end_date.val()) < (@getDateFromStr start_date.val())
+      $('a[data-target="#baseField"]').trigger('click')
+      show_alert '结束时间不能早于开始时间'
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
