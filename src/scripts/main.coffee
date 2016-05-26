@@ -391,7 +391,7 @@ class BuilderView extends Backbone.View
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
-    if @collection.models.length == 0
+    if (_.filter @collection.models,(a)->a.attributes.field_type != 'section_break').length == 0
       show_alert '您一个题目都还没添加哦~'
       return 0
     check_result = check_options @collection.models
