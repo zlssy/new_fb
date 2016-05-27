@@ -385,9 +385,9 @@ class BuilderView extends Backbone.View
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
-    if (@getDateFromStr end_date.val()) < (@getDateFromStr start_date.val())
+    if (@getDateFromStr end_date.val()) <= (@getDateFromStr start_date.val())
       $('a[data-target="#baseField"]').trigger('click')
-      show_alert '结束时间不能早于开始时间'
+      show_alert '结束时间必须晚于开始时间'
       end_date.focus()
       end_date.parents('.input-group').addClass('has-error')
       return 0
@@ -525,8 +525,17 @@ check_options = (opts)->
       for o in opt.attributes.field_options.options
         has = true if o.label != ''
       msg.push ' 至少要填一个选项' if !has
+    if opt.attributes.field_options.max and opt.attributes.field_options.min
+      msg.push '最多选项数不能小于最小选项数' if +opt.attributes.field_options.min>+opt.attributes.field_options.max
+    if opt.attributes.field_options.maxlength and opt.attributes.field_options.minlength
+      msg.push '最大字符数不能小于最小字符数' if +opt.attributes.field_options.minlength>+opt.attributes.field_options.maxlength
+    if fideltype is 'checkboxes' and opt.attributes.field_options.min
+      itemlength = opt.attributes.field_options.options.length
+      if opt.attributes.field_options.include_other_option
+        itemlength++
+      msg.push '选项数少于最小选项数' if itemlength < +opt.attributes.field_options.min
     r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg.length
-
+  
   if r.length then r else true
 
 if module?
