@@ -23,4 +23,6 @@
   """
 
   defaultAttributes: (attrs) ->
+    attrs[Formbuilder.options.mappings.REQUIRED] = false
+
     attrs

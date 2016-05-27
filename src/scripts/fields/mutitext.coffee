@@ -22,4 +22,6 @@ Formbuilder.registerField 'mutitext',
   """
 
   defaultAttributes: (attrs) ->
+    attrs[Formbuilder.options.mappings.REQUIRED] = false
+
     attrs
