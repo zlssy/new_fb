@@ -534,6 +534,14 @@ check_options = (opts)->
       if opt.attributes.field_options.include_other_option
         itemlength++
       msg.push '选项数少于最小选项数' if itemlength < +opt.attributes.field_options.min
+    if opt.attributes.field_options.options and opt.attributes.field_options.options.length
+      labels =[]
+      for item in opt.attributes.field_options.options
+        if labels.indexOf(item.label) > -1
+          msg.push '选项重复'
+          break;
+        labels.push(item.label)        
+
     r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg.length
   
   if r.length then r else true
