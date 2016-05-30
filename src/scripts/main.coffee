@@ -78,6 +78,8 @@ class EditFieldView extends Backbone.View
       @addOption e if key == 13
     'click .js-remove-option': 'removeOption'
     'click .js-default-updated': 'defaultUpdated'
+    'click .js-go-next': 'goNext'
+    'click .js-go-prev': 'goPrev'
     'input .option-label-input': 'forceRender'
 
   initialize: (options) ->
@@ -118,6 +120,29 @@ class EditFieldView extends Backbone.View
     @model.set Formbuilder.options.mappings.OPTIONS, options
     @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
     @forceRender()
+
+  goPrev: (e) ->
+    $el = $(e.currentTarget)
+    i = @$el.find('.option').index($el.closest('.option'))
+    options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
+    
+    if i > 0
+      options.splice i-1,0,(options.splice i,1)[0]
+      @model.set Formbuilder.options.mappings.OPTIONS, options
+      @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+      @forceRender()
+
+  goNext: (e) ->
+    $el = $(e.currentTarget)
+    i = @$el.find('.option').index($el.closest('.option'))
+    options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
+    
+    if i < options.length-1
+      options.splice i+1,0,(options.splice i,1)[0]
+      @model.set Formbuilder.options.mappings.OPTIONS, options
+      @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+      @forceRender()
+
 
   defaultUpdated: (e) ->
     $el = $(e.currentTarget)
