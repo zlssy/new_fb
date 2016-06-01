@@ -91,28 +91,29 @@ a.fb-button {
 .fb-tabs {
   list-style: none;
   margin: 0 0 20px 0;
-  padding: 0 0 0 20px;
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
 }
 
 .fb-tabs li {
-  display: inline-block;
+  display: table-cell;
+  width: 1%;
 }
 
 .fb-tabs li a {
   display: block;
   padding: 6px 10px;
-  border-radius: 5px 5px 0 0;
   font-size: 13px;
+  text-align: center;
   cursor: pointer;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
 }
 
 .fb-tabs li.active a {
-  border: 1px solid #ccc;
-  margin-bottom: -1px;
-  border-bottom-color: #fff;
+  background-color: #009AFF;
+  color: #fff;
 }
 
 .fb-tab-content .fb-tab-pane {
@@ -506,6 +507,11 @@ a.fb-button {
 }
 
 
+/* 复写bootstrap btn-sm */
+.btn-sm {
+   padding: 1px 4px;
+}
+
 @keyframes hide {
   0% {
     top: 0;
@@ -532,3 +538,4 @@ a.fb-button {
   animation: show .5s linear;
   animation-fill-mode: both;
 }
+

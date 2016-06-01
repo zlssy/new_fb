@@ -73,7 +73,7 @@ class EditFieldView extends Backbone.View
 
   events:
     'click .js-add-option': 'addOption'
-    'keypress .option-label-input:last': (e) ->
+    'keypress .option-label-input:last, .rows:last>.option-label-input': (e) ->
       key = e.keyCode or e.which
       @addOption e if key == 13
     'click .js-remove-option': 'removeOption'
@@ -99,48 +99,112 @@ class EditFieldView extends Backbone.View
   # @todo this should really be on the model, not the view
   addOption: (e) ->
     $el = $(e.currentTarget)
-    i = @$el.find('.option').index($el.closest('.option'))
-    options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
-    newOption = {label: "", checked: false}
+    $ep = $el.parent()
+    addCol = $ep.hasClass('cols')
+    addRow = $ep.hasClass('rows')
+    if(addCol)
+      options = @model.get(Formbuilder.options.mappings.COLS) || []
+      newOption = {label: ""}
+    else if(addRow)
+      options = @model.get(Formbuilder.options.mappings.ROWS) || []
+      newOption = {label: ""}
+    else
+      options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
+      newOption = {label: "", checked: false}
 
+    i = @$el.find('.option').index($el.closest('.option'))
     if i > -1
       options.splice(i + 1, 0, newOption)
     else
       options.push newOption
 
-    @model.set Formbuilder.options.mappings.OPTIONS, options
-    @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+    if(addRow)
+      action = 'ROWS'
+      triggerEvt = "change:#{Formbuilder.options.mappings.ROWS}"
+    else if(addCol)
+      action = 'COLS'
+      triggerEvt = "change:#{Formbuilder.options.mappings.COLS}"
+    else
+      action = 'OPTIONS'
+      triggerEvt = "change:#{Formbuilder.options.mappings.OPTIONS}"
+    @model.set Formbuilder.options.mappings[action], options
+    @model.trigger triggerEvt
     @forceRender()
 
   removeOption: (e) ->
     $el = $(e.currentTarget)
-    index = @$el.find(".js-remove-option").index($el)
-    options = @model.get Formbuilder.options.mappings.OPTIONS
-    options.splice index, 1
-    @model.set Formbuilder.options.mappings.OPTIONS, options
-    @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+    $ep = $el.parent()
+    isCol = $ep.hasClass('cols')
+    isRow = $ep.hasClass('rows')
+    if(isRow)
+      selector = "rows .js-remove-option"
+      modelKey = "ROWS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.ROWS}"
+    else if(isCol)
+      selector = "cols .js-remove-option"
+      modelKey = "COLS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.COLS}"
+    else
+      selector = ".js-remove-option"
+      modelKey = "OPTIONS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.OPTIONS}"
+    index = @$el.find(selector).index($el)
+    options = @model.get Formbuilder.options.mappings[modelKey]
+    options.length > 1 and (options.splice index, 1)
+    @model.set Formbuilder.options.mappings[modelKey], options
+    @model.trigger triggerEvt
     @forceRender()
 
   goPrev: (e) ->
     $el = $(e.currentTarget)
-    i = @$el.find('.option').index($el.closest('.option'))
-    options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
+    $ep = $el.parent()
+    isCol = $ep.hasClass('cols')
+    isRow = $ep.hasClass('rows')
+    if(isRow)
+      selector = ".rows.option"
+      modelKey = "ROWS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.ROWS}"
+    else if(isCol)
+      selector = ".cols.option"
+      modelKey = "COLS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.COLS}"
+    else
+      selector = ".option"
+      modelKey = "OPTIONS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.OPTIONS}"
+    i = @$el.find(selector).index($el.closest('.option'))
+    options = @model.get(Formbuilder.options.mappings[modelKey]) || []
     
     if i > 0
       options.splice i-1,0,(options.splice i,1)[0]
-      @model.set Formbuilder.options.mappings.OPTIONS, options
-      @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+      @model.set Formbuilder.options.mappings[modelKey], options
+      @model.trigger triggerEvt
       @forceRender()
 
   goNext: (e) ->
     $el = $(e.currentTarget)
-    i = @$el.find('.option').index($el.closest('.option'))
-    options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
+    $ep = $el.parent()
+    isCol = $ep.hasClass('cols')
+    isRow = $ep.hasClass('rows')
+    if(isRow)
+      selector = ".rows.option"
+      modelKey = "ROWS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.ROWS}"
+    else if(isCol)
+      selector = ".cols.option"
+      modelKey = "COLS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.COLS}"
+    else
+      selector = ".option"
+      modelKey = "OPTIONS"
+      triggerEvt = "change:#{Formbuilder.options.mappings.OPTIONS}"
+    i = @$el.find(selector).index($el.closest('.option'))
+    options = @model.get(Formbuilder.options.mappings[modelKey]) || []
     
     if i < options.length-1
       options.splice i+1,0,(options.splice i,1)[0]
-      @model.set Formbuilder.options.mappings.OPTIONS, options
-      @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+      @model.set Formbuilder.options.mappings[modelKey], options
+      @model.trigger triggerEvt
       @forceRender()
 
 
@@ -153,7 +217,7 @@ class EditFieldView extends Backbone.View
 
   forceRender: (e)->
     $el = $(this.el)
-    $el.find('.fb-bottom-add').toggle(!@model.get(Formbuilder.options.mappings.OPTIONS).length)
+    $el.find('.fb-bottom-add').size() and $el.find('.fb-bottom-add').toggle(!@model.get(Formbuilder.options.mappings.OPTIONS).length)
     @model.trigger('change')
 
 
@@ -496,6 +560,8 @@ class Formbuilder
       REQUIRED: 'required'
       ADMIN_ONLY: 'admin_only'
       OPTIONS: 'field_options.options'
+      ROWS: 'field_options.rows'
+      COLS: 'field_options.cols'
       DESCRIPTION: 'field_options.description'
       INCLUDE_OTHER: 'field_options.include_other_option'
       INCLUDE_BLANK: 'field_options.include_blank_option'
