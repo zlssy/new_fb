@@ -81,6 +81,7 @@ class EditFieldView extends Backbone.View
     'click .js-go-next': 'goNext'
     'click .js-go-prev': 'goPrev'
     'input .option-label-input': 'forceRender'
+    # 'change #upload-file-muti': 'upload'
 
   initialize: (options) ->
     {@parentView} = options
@@ -88,7 +89,7 @@ class EditFieldView extends Backbone.View
 
   render: ->
     @$el.html(Formbuilder.templates["edit/base#{if !@model.is_input() then '_non_input' else ''}"]({rf: @model}))
-    rivets.bind @$el, { model: @model }
+    rivets.bind @$el, { model: @model }    
     return @
 
   remove: ->
@@ -206,6 +207,18 @@ class EditFieldView extends Backbone.View
       @model.set Formbuilder.options.mappings[modelKey], options
       @model.trigger triggerEvt
       @forceRender()
+
+  upload: (e) ->
+    $el = $(e.currentTarget)
+    files = e.currentTarget.files
+    $el.fileupload
+      start: ()->
+        console.log('start')
+      beforeSend: (e, data)->
+        data.url = window.G_BASE_URL ? G_BASE_URL + '/?/q/ajax/upload/' : '/?/q/ajax/upload/'
+      always: (e, data)->
+        if data.result
+          console.log(data.result)
 
 
   defaultUpdated: (e) ->
@@ -399,6 +412,7 @@ class BuilderView extends Backbone.View
     @handleFormUpdate()
 
   createAndShowEditView: (model) ->
+    self = @
     $responseFieldEl = @$el.find(".fb-field-wrapper").filter( -> $(@).data('cid') == model.cid )
     $responseFieldEl.addClass('editing').siblings('.fb-field-wrapper').removeClass('editing')
 
@@ -418,6 +432,23 @@ class BuilderView extends Backbone.View
     @$el.find(".fb-edit-field-wrapper").html $newEditEl
     @$el.find(".fb-tabs a[data-target=\"#editField\"]").click()
     @scrollLeftWrapper($responseFieldEl)
+    # 注册文件上传事件
+    $el = $('#upload-file-muti')
+    $el and $el.fileupload
+      fileInput: $el.find('file').get(0)
+      start: ()-> #noop        
+      beforeSend: (e, data)->
+        data.url = if window.G_BASE_URL then G_BASE_URL+'/q/ajax/upload/' else '/q/ajax/upload/'
+      always: (e, data)->
+        baseUrl = if window.G_BASE_URL then G_BASE_URL.replace(/\?/, '') else ''
+        if data.result and data.result.code == 0
+          options = model.get(Formbuilder.options.mappings.OPTIONS) || []
+          newOption = {label: "", checked: false, uri: baseUrl+data.result.data.url, thumb: (baseUrl+data.result.data.url).replace(/(\/)([^\/]+)$/, '$1100_100/$2')}
+          options.push(newOption)
+          model.set Formbuilder.options.mappings.OPTIONS, options
+          model.trigger('change:'+Formbuilder.options.mappings.OPTIONS)
+          model.trigger('change');
+          self.forceRender()
     return @
 
   mode_error: (m, e)->

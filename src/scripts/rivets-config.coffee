@@ -6,8 +6,12 @@
   unbind: (el) ->
     $(el).unbind('input.rivets')
 
+rivets.binders.src = (el, value)->
+  el.src = value
+
 rivets.configure
-  prefix: "rv"  
+  prefix: "rv"
+  templateDelimiters: ['{', '}']
   adapter:
     subscribe: (obj, keypath, callback) ->
       callback.wrapped = (m, v) -> callback(v)
@@ -27,4 +31,6 @@ rivets.configure
         obj[keypath] = value
 
 rivets.formatters.getname = (v) ->
-    Formbuilder.fields[v].name
+  Formbuilder.fields[v].name
+rivets.formatters.icon = (v)->
+  v.replace(/(\/)([^\/]+)$/, '$140_40/$2')

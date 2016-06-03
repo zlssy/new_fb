@@ -316,6 +316,17 @@ a.fb-button {
 
 .fb-edit-field-wrapper {
   font-size: 13px;
+
+  & .option {
+
+    & img {
+      display: inline-block;
+    }
+
+    & .img-label{
+      width: 50%;
+    }
+  }
 }
 
 .fb-edit-field-wrapper .fb-field-label {
@@ -506,6 +517,114 @@ a.fb-button {
   font-size: 12px;
 }
 
+/* ace-file-input */
+.ace-file-input {
+  display: block;
+  position:relative;
+  margin-bottom: 5px;
+
+  & input[type=file]{
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: -999;
+    overflow:hidden;
+    opacity: 0;
+  }
+  & .ace-file-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    cursor: pointer;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
+
+    & .ace-icon {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      line-height: 24px;
+      width: 26px;
+      text-align: center;
+      font-family: FontAwesome;
+      font-size: 13px;
+      border: 2px solid #FFF;
+      color: #FFF;
+      -webkit-transition: all .1s;
+      -o-transition: all .1s;
+      transition: all .1s;
+      background-color: #d1d1d1;
+    }
+  }
+}
+.ace-file-multiple {
+  height: auto;
+
+  & .ace-file-container {
+    position: relative;
+    border: dashed 1px #aaa;
+    border-radius: 4px;
+    text-align: center;
+
+    &:before {
+      display: inline-block;
+      content: attr(data-title);
+      position: relative;
+      right: 0;
+      left: 0;
+      margin: 2px;
+      line-height: 22px;
+      background-color: #FFF;
+      color: #CCC;
+      font-size: 18px;
+      font-weight: 700;
+      border-width: 0;
+    }
+
+    & .ace-file-name {
+      position: relative;
+      display: block;
+      padding: 0;
+      height: auto;
+      width: auto;
+      max-width: 100%;
+      margin: 0 4px;
+      border-bottom: 1px solid #DDD;
+      text-align: left
+
+      &:last-child {
+        border-bottom-width: 0;
+        margin-bottom: 1px;
+      }
+
+      &:first-child {
+        margin-top: 1px;
+      }
+
+      & .ace-icon{
+        position: relative;
+        display: block;
+        text-align: center;
+        height: auto;
+        line-height: 32px;
+        width: auto;
+        font-size: 32px;
+        color: #D5D5D5;
+        margin: 4px 0;
+        background-color: transparent;
+      }
+    } 
+  }
+}
 
 /* 复写bootstrap btn-sm */
 .btn-sm {

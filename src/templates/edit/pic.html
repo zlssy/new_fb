@@ -1,0 +1,16 @@
+<div>选项</div>
+
+<div class='option' data-rv-each-option='model.<%= Formbuilder.options.mappings.OPTIONS %>'>
+  <input type="checkbox" class='js-default-updated' data-rv-checked="option:checked" />
+  <img data-rv-src="option:uri | icon" />
+  <input type="text" data-rv-input="option:label" class='option-label-input img-label' />
+  <a class="js-remove-option <%= Formbuilder.options.BUTTON_CLASS_SM %>" title="删除选项"><i class='fa fa-minus-circle'></i></a>
+  <a class="js-go-next <%= Formbuilder.options.BUTTON_CLASS_SM %>" title="下移"><i class="glyphicon glyphicon-arrow-down"></i></a>
+  <a class="js-go-prev <%= Formbuilder.options.BUTTON_CLASS_SM %>" title="上移"><i class="glyphicon glyphicon-arrow-up"></i></a>
+</div>
+
+<div class="col-xs-12">
+  <form name="file" onsubmit="return false">
+  <label class="ace-file-input ace-file-multiple" id="upload-file-muti"><input multiple="" name="upfile" type="file"><span class="ace-file-container" data-title="点击上传图片"><span class="ace-file-name" data-title="No File ..."><i class=" ace-icon ace-icon fa fa-cloud-upload"></i></span></span></label>
+  </form>
+</div>
