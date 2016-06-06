@@ -223,7 +223,7 @@ class EditFieldView extends Backbone.View
 
   defaultUpdated: (e) ->
     $el = $(e.currentTarget)
-    unless @model.get(Formbuilder.options.mappings.FIELD_TYPE) == 'checkboxes' # checkboxes can have multiple options selected
+    unless @model.get(Formbuilder.options.mappings.FIELD_TYPE) == 'checkboxes' or @model.get(Formbuilder.options.mappings.FIELD_TYPE) == 'mutiPic' # checkboxes and mutiPic can have multiple options selected
       @$el.find(".js-default-updated").not($el).attr('checked', false).trigger('change')
 
     @forceRender()
@@ -443,7 +443,7 @@ class BuilderView extends Backbone.View
         baseUrl = if window.G_BASE_URL then G_BASE_URL.replace(/\?/, '') else ''
         if data.result and data.result.code == 0
           options = model.get(Formbuilder.options.mappings.OPTIONS) || []
-          newOption = {label: "", checked: false, uri: baseUrl+data.result.data.url, thumb: (baseUrl+data.result.data.url).replace(/(\/)([^\/]+)$/, '$1100_100/$2')}
+          newOption = {label: "", checked: false, uri: data.result.data.url, thumb: data.result.data.url.replace(/(\/)([^\/]+)$/, '$1100_100/$2')}
           options.push(newOption)
           model.set Formbuilder.options.mappings.OPTIONS, options
           model.trigger('change:'+Formbuilder.options.mappings.OPTIONS)
