@@ -4,9 +4,9 @@ Formbuilder.registerField 'singlePic',
   name: '图片单选题'
 
   view: """
-    <div class="row">
+    <div class="pic_list">
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         <label class='fb-option'>
           <div><img src="<%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].thumb %>" /></div>
           <input type='radio' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick="javascript: return false;" />

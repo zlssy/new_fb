@@ -62,7 +62,7 @@ class ViewFieldView extends Backbone.View
         cb()
 
   duplicate: ->
-    attrs = _.clone(@model.attributes)
+    attrs = $.extend(true, {}, @model.attributes)
     delete attrs['id']
     attrs['label'] += ' 复制项'
     @parentView.createField attrs, { position: @model.indexInDOM() + 1 }
@@ -431,7 +431,7 @@ class BuilderView extends Backbone.View
     $newEditEl = @editView.render().$el
     @$el.find(".fb-edit-field-wrapper").html $newEditEl
     @$el.find(".fb-tabs a[data-target=\"#editField\"]").click()
-    @scrollLeftWrapper($responseFieldEl)
+    # @scrollLeftWrapper($responseFieldEl)
     # 注册文件上传事件
     $el = $('#upload-file-muti')
     $el and $el.fileupload
