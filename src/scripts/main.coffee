@@ -138,11 +138,11 @@ class EditFieldView extends Backbone.View
     isCol = $ep.hasClass('cols')
     isRow = $ep.hasClass('rows')
     if(isRow)
-      selector = "rows .js-remove-option"
+      selector = ".rows .js-remove-option"
       modelKey = "ROWS"
       triggerEvt = "change:#{Formbuilder.options.mappings.ROWS}"
     else if(isCol)
-      selector = "cols .js-remove-option"
+      selector = ".cols .js-remove-option"
       modelKey = "COLS"
       triggerEvt = "change:#{Formbuilder.options.mappings.COLS}"
     else
@@ -299,6 +299,7 @@ class BuilderView extends Backbone.View
 
     # Save jQuery objects for easy use
     @$fbLeft = @$el.find('.fb-left')
+    @$fbRight = @$el.find('.fb-right')
     @$responseFields = @$el.find('.fb-response-fields')
 
     @bindWindowScrollEvent()
@@ -313,8 +314,8 @@ class BuilderView extends Backbone.View
     $(window).on 'scroll , resize', =>
       # return if @$fbLeft.data('locked') == true
       newMargin = Math.max(0, $(window).scrollTop() - @$el.offset().top)
-      maxMargin = @$responseFields.height()
-
+      maxMargin = @$fbRight.height()
+      
       @$fbLeft.css
         'margin-top': Math.min(maxMargin, newMargin)
 
@@ -468,7 +469,7 @@ class BuilderView extends Backbone.View
       @lockLeftWrapper()
 
   lockLeftWrapper: ->
-    @$fbLeft.data('locked', true)
+    # @$fbLeft.data('locked', true)
 
   unlockLeftWrapper: ->
     @$fbLeft.data('locked', false)
@@ -639,10 +640,10 @@ check_options = (opts)->
   r = []
   for opt in opts
     msg = []
-    fideltype = opt.attributes.field_type
-    if fideltype isnt 'section_break'
+    fieldtype = opt.attributes.field_type
+    if fieldtype isnt 'section_break'
       msg.push '标题不能为空' if opt.attributes.label == ''
-    if fideltype is 'radio' or fideltype is 'checkboxes'
+    if fieldtype is 'radio' or fieldtype is 'checkboxes' or fieldtype is 'singlePic' or fieldtype is 'mutiPic'
       has = false
       for o in opt.attributes.field_options.options
         has = true if o.label != ''
@@ -651,7 +652,7 @@ check_options = (opts)->
       msg.push '最多选项数不能小于最小选项数' if +opt.attributes.field_options.min>+opt.attributes.field_options.max
     if opt.attributes.field_options.maxlength and opt.attributes.field_options.minlength
       msg.push '最大字符数不能小于最小字符数' if +opt.attributes.field_options.minlength>+opt.attributes.field_options.maxlength
-    if fideltype is 'checkboxes' and opt.attributes.field_options.min
+    if fieldtype is 'checkboxes' and opt.attributes.field_options.min
       itemlength = opt.attributes.field_options.options.length
       if opt.attributes.field_options.include_other_option
         itemlength++
@@ -662,8 +663,21 @@ check_options = (opts)->
         if labels.indexOf(item.label) > -1
           msg.push '选项重复'
           break;
-        labels.push(item.label)        
+        labels.push(item.label)
+      for item in opt.attributes.field_options.options
+        if item.label == ''
+          msg.push '选项不能为空'
+          break;
 
+    if fieldtype is 'singleMatrix' or fieldtype is 'mutiMatrix'
+      for item in opt.attributes.field_options.rows
+        if item.label == ''
+          msg.push '行标题不能为空'
+          break;
+      for item in opt.attributes.field_options.cols
+        if item.label == ''
+          msg.push '列标题不能为空'
+          break;
     r.push {mod: opt, msg: '('+msg.join(' , ')+')'} if msg.length
   
   if r.length then r else true

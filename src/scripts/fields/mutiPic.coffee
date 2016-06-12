@@ -22,6 +22,7 @@ Formbuilder.registerField 'mutiPic',
   """
 
   other: """
+    <%= Formbuilder.templates['edit/min_max']() %>
   """
 
   addButton: """

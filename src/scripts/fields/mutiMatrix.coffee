@@ -1,7 +1,7 @@
 Formbuilder.registerField 'mutiMatrix',
 
   order: 55
-  name: '多选矩阵题'
+  name: '矩阵多选题'
 
   view: """
     <table class='table table-bordered'>
@@ -33,7 +33,7 @@ Formbuilder.registerField 'mutiMatrix',
   """
 
   addButton: """
-    <span class="symbol"><span class="glyphicon glyphicon-th"></span></span> 多选矩阵题
+    <span class="symbol"><span class="glyphicon glyphicon-th"></span></span> 矩阵多选题
   """
 
   defaultAttributes: (attrs) ->

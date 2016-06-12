@@ -1,7 +1,7 @@
 Formbuilder.registerField 'singleMatrix',
 
   order: 50
-  name: '单选矩阵题'
+  name: '矩阵单选题'
 
   view: """
     <table class='table table-bordered'>
@@ -33,7 +33,7 @@ Formbuilder.registerField 'singleMatrix',
   """
 
   addButton: """
-    <span class="symbol"><span class="glyphicon glyphicon-th"></span></span> 单选矩阵题
+    <span class="symbol"><span class="glyphicon glyphicon-th"></span></span> 矩阵单选题
   """
 
   defaultAttributes: (attrs) ->
