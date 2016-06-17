@@ -266,12 +266,14 @@ class BuilderView extends Backbone.View
     fields = @bootstrapData.fields
     starttime = @bootstrapData.starttime
     endtime = @bootstrapData.endtime
+    islogin = @bootstrapData.islogin or false
     @render()
     @collection.reset(fields)
     $('input[name=title]').val title
     $('textarea[name=content]').text content
     $('#start_date').val starttime
     $('#end_date').val endtime
+    $('#islogin').prop 'checked', !!islogin
 
     _.isFunction(callback) && callback(@)
     @bindSaveEvent()
@@ -315,7 +317,7 @@ class BuilderView extends Backbone.View
       # return if @$fbLeft.data('locked') == true
       newMargin = Math.max(0, $(window).scrollTop() - @$el.offset().top)
       maxMargin = @$fbRight.height()
-      
+
       @$fbLeft.css
         'margin-top': Math.min(maxMargin, newMargin)
 
@@ -485,9 +487,10 @@ class BuilderView extends Backbone.View
   saveForm: (e) ->
     return if @formSaved
     title = $('input[name=title]')
-    content = $('textarea[name=content').val()
+    content = $('textarea[name=content]').val()
     start_date = $('#start_date')
     end_date = $('#end_date')
+    islogin = $('#islogin').prop('checked')
     if title.val() == ''
       $('a[data-target="#baseField"]').trigger('click')
       show_alert '问卷标题不能为空'
@@ -526,6 +529,7 @@ class BuilderView extends Backbone.View
       content: content
       starttime: start_date.val()
       endtime: end_date.val()
+      islogin: islogin - 0
       fields: @collection.toJSON()
 
     if Formbuilder.options.HTTP_ENDPOINT then @doAjaxSave(payload)

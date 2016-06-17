@@ -56,7 +56,6 @@ a.fb-button {
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
-  font-family: 'Source Sans Pro', 'Open Sans', Tahoma;
 }
 
 .fb-save-wrapper {
@@ -141,7 +140,7 @@ a.fb-button {
   color: #333;
 
   &:nth-child(odd) {
-    margin-right: 3%;
+    margin-right: 2%;
   }
 
   &:hover {
@@ -446,7 +445,12 @@ a.fb-button {
 .errormsg { font-size:11px; }
 .gray { color:#BBB; }
 .mt-4 { margin-top: 4px; }
+.mt-5 { margin-top: 5px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
 .mb-5 { margin-bottom: 5px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
 .hide { display:none; }
 .question_head {
   width: 100%;
@@ -486,6 +490,10 @@ a.fb-button {
     &.error {
       outline: none;
       border: solid 1px red;
+    }
+    &input[type=text] {
+      height: 26px;
+      margin-bottom: 3px;
     }
   }
   &:focus {
@@ -633,6 +641,104 @@ a.fb-button {
   }
 }
 
+/* ce-switch */
+input[type=checkbox].ce-switch {
+  z-index: -100!important;
+  width: 1px!important;
+  height: 1px!important;
+  clip: rect(1px,1px,1px,1px);
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  margin: 4px 0 0;
+  line-height: normal;
+
+  &+.lbl {
+    margin: 0 4px;
+    min-height: 24px;
+    min-width: 18px;
+    position: relative;
+    display: inline-block;
+    line-height: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 14px;
+
+    &::before {
+      position: relative;
+      content: "ON\a0\a0\a0\a0\a0\a0\a0\a0\a0OFF";
+      color: #555;
+      text-indent: -24px;
+      text-shadow: 0 0 0 #999;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 21px;
+      height: 24px;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #eee;
+      border: 1px solid #eee;
+      -webkit-box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.15);
+      box-shadow: none;
+      text-align: left;
+      float: left;
+      padding: 0;
+      width: 56px;
+      text-indent: -25px;
+      margin-right: 0;
+      -webkit-transition: text-indent .3s ease;
+      -o-transition: text-indent .3s ease;
+      transition: text-indent .3s ease;
+      top: auto;
+    }
+
+    &::after {
+      content: ' ';
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: #939393;
+      text-shadow: none;
+      background-color: #FFF;
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      line-height: 19px;
+      text-align: center;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,.3);
+      box-shadow: 0 1px 1px 1px rgba(0,0,0,.3);
+      -webkit-transition: left .3s ease;
+      -o-transition: left .3s ease;
+      transition: left .3s ease
+    }
+  }
+
+  &:checked {
+
+    &+.lbl {
+      &::before {              
+        text-indent: 7px;
+        background-color: #468fcc;
+        border-color: #468FCC;
+        color: #fff;
+      }
+      
+      &::after {
+        left: 34px;
+      }
+    }
+  }
+}
+
+.form-group label.adjust {
+  position:relative;
+  top:-7px;
+  font-size: 14px;
+}
+
 /* 复写bootstrap btn-sm */
 .btn-sm {
    padding: 1px 4px;
@@ -647,6 +753,7 @@ a.fb-button {
     display: none;
   }
 }
+
 @keyframes show {
   0% {
     top: -100px;
@@ -656,6 +763,13 @@ a.fb-button {
     top: 0
   }
 }
+
+animation()
+  -webkit-animation: arguments
+  -moz-animation: arguments
+  -o-animation: arguments
+  animation: arguments
+
 #r_tips.out {
   animation: hide .5s linear;
   animation-fill-mode: both;
